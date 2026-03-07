@@ -12,12 +12,12 @@ Implémenter un composant d'échiquier interactif permettant de visualiser et na
 
 ## 🎯 Objectifs
 
-- [ ] Afficher un échiquier standard avec pièces
-- [ ] Naviguer dans les coups (suivant, précédent, début, fin)
-- [ ] Afficher la notation algébrique des coups
-- [ ] Interface responsive (desktop et mobile)
-- [ ] Animations fluides lors des déplacements
-- [ ] Réutilisable dans toute l'application
+- [x] Afficher un échiquier standard avec pièces
+- [x] Naviguer dans les coups (suivant, précédent, début, fin)
+- [x] Afficher la notation algébrique des coups
+- [x] Interface responsive (desktop et mobile)
+- [x] Animations fluides lors des déplacements
+- [x] Réutilisable dans toute l'application
 
 ## 👥 User Stories
 
@@ -27,11 +27,11 @@ Implémenter un composant d'échiquier interactif permettant de visualiser et na
 **afin de** comprendre visuellement la position.
 
 **Critères d'acceptation :**
-- [ ] Échiquier 8x8 avec alternance cases blanches/noires
-- [ ] Pièces affichées avec des symboles Unicode ou images
-- [ ] Coordonnées visibles (a-h, 1-8)
-- [ ] Taille adaptative selon l'écran
-- [ ] Lisible sur mobile (minimum 300px)
+- [x] Échiquier 8x8 avec alternance cases blanches/noires
+- [x] Pièces affichées avec des symboles Unicode ou images
+- [x] Coordonnées visibles (a-h, 1-8)
+- [x] Taille adaptative selon l'écran
+- [x] Lisible sur mobile (minimum 300px)
 
 ### US2 : Navigation dans les coups
 **En tant que** utilisateur,  
@@ -52,11 +52,11 @@ Implémenter un composant d'échiquier interactif permettant de visualiser et na
 **afin de** apprendre la notation standard.
 
 **Critères d'acceptation :**
-- [ ] Liste des coups en notation algébrique (ex: 1.e4 e5 2.Nf3 Nc6)
-- [ ] Mise en surbrillance du coup actuel
-- [ ] Possibilité de cliquer sur un coup pour sauter à cette position
-- [ ] Scroll automatique pour garder le coup actuel visible
-- [ ] Format lisible : numéros de coups + coups blancs/noirs
+- [x] Liste des coups en notation algébrique (ex: 1.e4 e5 2.Nf3 Nc6)
+- [x] Mise en surbrillance du coup actuel
+- [x] Possibilité de cliquer sur un coup pour sauter à cette position
+- [x] Scroll automatique pour garder le coup actuel visible
+- [x] Format lisible : numéros de coups + coups blancs/noirs
 
 ### US4 : Modes d'affichage
 **En tant que** utilisateur,  
@@ -64,10 +64,10 @@ Implémenter un composant d'échiquier interactif permettant de visualiser et na
 **afin de** voir la position du point de vue des noirs ou des blancs.
 
 **Critères d'acceptation :**
-- [ ] Toggle pour inverser l'échiquier (blancs en bas / noirs en bas)
-- [ ] Bouton clair pour changer l'orientation
-- [ ] Coordonnées adaptées selon l'orientation
-- [ ] État sauvegardé pendant la session
+- [x] Toggle pour inverser l'échiquier (blancs en bas / noirs en bas)
+- [x] Bouton clair pour changer l'orientation
+- [x] Coordonnées adaptées selon l'orientation
+- [x] État sauvegardé pendant la session
 
 ### US5 : Responsive et accessibilité
 **En tant que** utilisateur mobile,  
@@ -405,7 +405,7 @@ const ChessOpeningViewer = ({ moves }: { moves: string }) => {
 - [x] Responsive (desktop et mobile)
 - [x] Tests unitaires du hook useChessboard
 - [x] Tests d'intégration du composant
-- [ ] Documentation du composant (props, exemples)
+- [x] Documentation du composant (props, exemples)
 - [x] Intégré dans Features 002 et 003
 - [x] Accessibilité validée (ARIA labels)
 

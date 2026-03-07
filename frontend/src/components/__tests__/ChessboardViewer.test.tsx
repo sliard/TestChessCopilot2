@@ -1,17 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { render } from '../../test/test-utils';
 import { ChessboardViewer } from '../ChessboardViewer';
 
+vi.mock('react-chessboard', () => ({
+  Chessboard: () => <div data-testid="chessboard" />,
+}));
+
 describe('ChessboardViewer', () => {
-  it('should display moves as individual tokens', () => {
+  it('should render chess board for valid moves', () => {
     render(<ChessboardViewer moves="1.e4 c5 2.Nf3 d6" />);
 
-    expect(screen.getByText('1.e4')).toBeInTheDocument();
-    expect(screen.getByText('c5')).toBeInTheDocument();
-    expect(screen.getByText('2.Nf3')).toBeInTheDocument();
-    expect(screen.getByText('d6')).toBeInTheDocument();
+    expect(screen.getByTestId('chessboard')).toBeInTheDocument();
   });
 
   it('should display empty state for empty moves', () => {
@@ -26,16 +27,16 @@ describe('ChessboardViewer', () => {
     expect(screen.getByText('Aucun coup enregistré')).toBeInTheDocument();
   });
 
-  it('should display navigation controls', () => {
+  it('should display navigation controls with aria-labels', () => {
     render(<ChessboardViewer moves="1.e4 c5" />);
 
-    expect(screen.getByText('⏮')).toBeInTheDocument();
-    expect(screen.getByText('◀')).toBeInTheDocument();
-    expect(screen.getByText('▶')).toBeInTheDocument();
-    expect(screen.getByText('⏭')).toBeInTheDocument();
+    expect(screen.getByLabelText('Premier coup')).toBeInTheDocument();
+    expect(screen.getByLabelText('Coup précédent')).toBeInTheDocument();
+    expect(screen.getByLabelText('Coup suivant')).toBeInTheDocument();
+    expect(screen.getByLabelText('Dernier coup')).toBeInTheDocument();
   });
 
-  it('should start at position 0', () => {
+  it('should display move counter starting at 0', () => {
     render(<ChessboardViewer moves="1.e4 c5" />);
 
     expect(screen.getByText('0 / 2')).toBeInTheDocument();
@@ -45,7 +46,7 @@ describe('ChessboardViewer', () => {
     const user = userEvent.setup();
     render(<ChessboardViewer moves="1.e4 c5" />);
 
-    await user.click(screen.getByText('▶'));
+    await user.click(screen.getByLabelText('Coup suivant'));
 
     expect(screen.getByText('1 / 2')).toBeInTheDocument();
   });
@@ -54,51 +55,74 @@ describe('ChessboardViewer', () => {
     const user = userEvent.setup();
     render(<ChessboardViewer moves="1.e4 c5" />);
 
-    // Advance first
-    await user.click(screen.getByText('▶'));
+    await user.click(screen.getByLabelText('Coup suivant'));
     expect(screen.getByText('1 / 2')).toBeInTheDocument();
 
-    // Go back
-    await user.click(screen.getByText('◀'));
+    await user.click(screen.getByLabelText('Coup précédent'));
     expect(screen.getByText('0 / 2')).toBeInTheDocument();
   });
 
-  it('should jump to start', async () => {
+  it('should jump to first position', async () => {
     const user = userEvent.setup();
     render(<ChessboardViewer moves="1.e4 c5 2.Nf3 d6" />);
 
-    // Advance to the end
-    await user.click(screen.getByText('⏭'));
+    await user.click(screen.getByLabelText('Dernier coup'));
     expect(screen.getByText('4 / 4')).toBeInTheDocument();
 
-    // Jump to start
-    await user.click(screen.getByText('⏮'));
+    await user.click(screen.getByLabelText('Premier coup'));
     expect(screen.getByText('0 / 4')).toBeInTheDocument();
   });
 
-  it('should jump to end', async () => {
+  it('should jump to last position', async () => {
     const user = userEvent.setup();
     render(<ChessboardViewer moves="1.e4 c5 2.Nf3 d6" />);
 
-    await user.click(screen.getByText('⏭'));
+    await user.click(screen.getByLabelText('Dernier coup'));
 
     expect(screen.getByText('4 / 4')).toBeInTheDocument();
   });
 
-  it('should disable previous and start buttons at position 0', () => {
+  it('should disable previous/first buttons at position 0', () => {
     render(<ChessboardViewer moves="1.e4 c5" />);
 
-    expect(screen.getByText('⏮')).toBeDisabled();
-    expect(screen.getByText('◀')).toBeDisabled();
+    expect(screen.getByLabelText('Premier coup')).toBeDisabled();
+    expect(screen.getByLabelText('Coup précédent')).toBeDisabled();
   });
 
-  it('should disable next and end buttons at last position', async () => {
+  it('should disable next/last buttons at last position', async () => {
     const user = userEvent.setup();
     render(<ChessboardViewer moves="1.e4 c5" />);
 
-    await user.click(screen.getByText('⏭'));
+    await user.click(screen.getByLabelText('Dernier coup'));
 
-    expect(screen.getByText('▶')).toBeDisabled();
-    expect(screen.getByText('⏭')).toBeDisabled();
+    expect(screen.getByLabelText('Coup suivant')).toBeDisabled();
+    expect(screen.getByLabelText('Dernier coup')).toBeDisabled();
+  });
+
+  it('should display flip board button', () => {
+    render(<ChessboardViewer moves="1.e4 c5" />);
+
+    expect(screen.getByText('🔄 Inverser')).toBeInTheDocument();
+  });
+
+  it('should display moves in MovesList', () => {
+    render(<ChessboardViewer moves="1.e4 c5 2.Nf3 d6" />);
+
+    expect(screen.getByText('e4')).toBeInTheDocument();
+    expect(screen.getByText('c5')).toBeInTheDocument();
+    expect(screen.getByText('Nf3')).toBeInTheDocument();
+    expect(screen.getByText('d6')).toBeInTheDocument();
+  });
+
+  it('should call onMoveChange when navigating', async () => {
+    const user = userEvent.setup();
+    const onMoveChange = vi.fn();
+    render(<ChessboardViewer moves="1.e4 c5" onMoveChange={onMoveChange} />);
+
+    expect(onMoveChange).toHaveBeenCalledWith(0);
+
+    await user.click(screen.getByLabelText('Coup suivant'));
+
+    expect(onMoveChange).toHaveBeenCalledWith(1);
   });
 });

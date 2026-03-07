@@ -25,11 +25,11 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 **afin de** découvrir les ouvertures classiques et décider lesquelles m'intéressent.
 
 **Critères d'acceptation :**
-- [ ] La page d'accueil affiche une liste paginée des ouvertures publiques
-- [ ] Chaque ouverture affiche : nom, description courte, code ECO, nombre de coups, auteur (si utilisateur public)
-- [ ] Les ouvertures sont triées par popularité ou date de création
-- [ ] La pagination fonctionne (20 ouvertures par page)
-- [ ] Temps de chargement < 500ms
+- [x] La page d'accueil affiche une liste paginée des ouvertures publiques
+- [x] Chaque ouverture affiche : nom, description courte, code ECO, nombre de coups, auteur (si utilisateur public)
+- [x] Les ouvertures sont triées par popularité ou date de création
+- [x] La pagination fonctionne (20 ouvertures par page)
+- [x] Temps de chargement < 500ms
 
 ### US2 : Consultation d'une ouverture
 **En tant que** visiteur anonyme,  
@@ -37,12 +37,12 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 **afin de** comprendre les coups et la logique de l'ouverture.
 
 **Critères d'acceptation :**
-- [ ] Clic sur une ouverture mène à une page de détail
-- [ ] Affichage du nom complet, description, code ECO
-- [ ] Échiquier interactif montrant la position
-- [ ] Navigation séquentielle dans les coups (suivant/précédent)
-- [ ] Notation algébrique visible pour chaque coup
-- [ ] Responsive (desktop et mobile)
+- [x] Clic sur une ouverture mène à une page de détail
+- [x] Affichage du nom complet, description, code ECO
+- [x] Échiquier interactif montrant la position
+- [x] Navigation séquentielle dans les coups (suivant/précédent)
+- [x] Notation algébrique visible pour chaque coup
+- [x] Responsive (desktop et mobile)
 
 ### US3 : Incitation à l'inscription
 **En tant que** visiteur anonyme,  
@@ -50,10 +50,10 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 **afin de** comprendre l'intérêt de m'inscrire.
 
 **Critères d'acceptation :**
-- [ ] Banner ou call-to-action visible sur la page de détail
-- [ ] Message type : "Créez un compte pour sauvegarder vos ouvertures favorites et créer les vôtres"
-- [ ] Lien vers la page d'inscription
-- [ ] Non intrusif (peut être fermé)
+- [x] Banner ou call-to-action visible sur la page de détail
+- [x] Message type : "Créez un compte pour sauvegarder vos ouvertures favorites et créer les vôtres"
+- [x] Lien vers la page d'inscription
+- [x] Non intrusif (peut être fermé)
 
 ### US4 : Recherche basique
 **En tant que** visiteur anonyme,  
@@ -61,11 +61,11 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 **afin de** trouver rapidement ce qui m'intéresse.
 
 **Critères d'acceptation :**
-- [ ] Barre de recherche en haut de la liste
-- [ ] Recherche en temps réel (debounced)
-- [ ] Recherche case-insensitive sur le nom de l'ouverture
-- [ ] Message si aucun résultat trouvé
-- [ ] Option pour réinitialiser la recherche
+- [x] Barre de recherche en haut de la liste
+- [x] Recherche en temps réel (debounced)
+- [x] Recherche case-insensitive sur le nom de l'ouverture
+- [x] Message si aucun résultat trouvé
+- [x] Option pour réinitialiser la recherche
 
 ## 🏗️ Conception technique
 
