@@ -16,6 +16,40 @@ const mockAuthResponse = {
   expiresIn: 900000,
 };
 
+// --- Mock data for public openings ---
+
+const mockOpenings = [
+  {
+    id: '550e8400-e29b-41d4-a716-446655440001',
+    name: 'Défense Sicilienne',
+    description: 'Une des ouvertures les plus populaires',
+    ecoCode: 'B20',
+    movesCount: 2,
+    author: 'Système',
+    createdAt: '2026-01-15T10:00:00Z',
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440002',
+    name: 'Ruy Lopez',
+    description: 'Ouverture classique espagnole',
+    ecoCode: 'C60',
+    movesCount: 3,
+    author: 'Système',
+    createdAt: '2026-01-14T10:00:00Z',
+  },
+];
+
+const mockOpeningDetail = {
+  id: '550e8400-e29b-41d4-a716-446655440001',
+  name: 'Défense Sicilienne',
+  description: 'Une des ouvertures les plus populaires',
+  ecoCode: 'B20',
+  moves: '1.e4 c5',
+  author: 'Système',
+  createdAt: '2026-01-15T10:00:00Z',
+  updatedAt: '2026-01-15T10:00:00Z',
+};
+
 export const handlers = [
   http.post(`${API_URL}/v1/auth/register`, async ({ request }) => {
     const body = (await request.json()) as Record<string, string>;
@@ -66,5 +100,60 @@ export const handlers = [
       );
     }
     return HttpResponse.json(mockUser);
+  }),
+
+  // --- Public Openings handlers ---
+
+  http.get(`${API_URL}/v1/public/openings/search`, ({ request }) => {
+    const url = new URL(request.url);
+    const q = url.searchParams.get('q');
+    const filtered = mockOpenings.filter((o) =>
+      o.name.toLowerCase().includes((q || '').toLowerCase()),
+    );
+    return HttpResponse.json({
+      content: filtered,
+      page: 0,
+      size: 20,
+      totalElements: filtered.length,
+      totalPages: filtered.length > 0 ? 1 : 0,
+      first: true,
+      last: true,
+    });
+  }),
+
+  http.get(`${API_URL}/v1/public/openings/:id`, ({ params }) => {
+    const { id } = params;
+    if (id === '550e8400-e29b-41d4-a716-446655440001') {
+      return HttpResponse.json(mockOpeningDetail);
+    }
+    return HttpResponse.json(
+      { code: 'NOT_FOUND', message: 'Ouverture non trouvée', status: 404 },
+      { status: 404 },
+    );
+  }),
+
+  http.get(`${API_URL}/v1/public/openings`, ({ request }) => {
+    const url = new URL(request.url);
+    const q = url.searchParams.get('q');
+    if (q === 'nonexistent') {
+      return HttpResponse.json({
+        content: [],
+        page: 0,
+        size: 20,
+        totalElements: 0,
+        totalPages: 0,
+        first: true,
+        last: true,
+      });
+    }
+    return HttpResponse.json({
+      content: mockOpenings,
+      page: 0,
+      size: 20,
+      totalElements: 2,
+      totalPages: 1,
+      first: true,
+      last: true,
+    });
   }),
 ];

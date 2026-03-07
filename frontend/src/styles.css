@@ -497,3 +497,352 @@ h2 {
   opacity: 1;
 }
 
+
+/* ========================================
+   Openings — List Page
+   ======================================== */
+
+.openings-page {
+  align-items: flex-start;
+  padding-top: 3rem;
+}
+
+.openings-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.openings-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.openings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.openings-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-text-secondary);
+}
+
+.openings-empty .btn {
+  margin-top: 1rem;
+}
+
+.openings-cta {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.openings-cta p {
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   Openings — Card
+   ======================================== */
+
+.opening-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.opening-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.opening-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.opening-eco-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.opening-eco-badge-lg {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.75rem;
+  margin-left: 0.75rem;
+  vertical-align: middle;
+}
+
+.opening-moves-count {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.opening-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.opening-card-description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.opening-card-footer {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   Openings — Search Bar
+   ======================================== */
+
+.search-bar {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.25rem;
+}
+
+.search-clear:hover {
+  color: var(--color-text);
+}
+
+/* ========================================
+   Openings — Pagination
+   ======================================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   Openings — Detail Page
+   ======================================== */
+
+.opening-detail-page {
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+.opening-detail-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.opening-back-btn {
+  margin-bottom: 1.5rem;
+}
+
+.opening-detail-header {
+  margin-bottom: 2rem;
+}
+
+.opening-detail-header h1 {
+  display: inline;
+}
+
+.opening-detail-header .opening-author {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.opening-detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.opening-detail-info .card {
+  background: var(--color-surface);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+}
+
+.opening-moves-notation {
+  font-family: monospace;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* ========================================
+   Openings — CTA Card
+   ======================================== */
+
+.opening-cta-card {
+  position: relative;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff) !important;
+  border: 1px solid var(--color-primary);
+}
+
+.opening-cta-card p {
+  margin-bottom: 1rem;
+}
+
+.opening-cta-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.opening-cta-close:hover {
+  color: var(--color-text);
+}
+
+/* ========================================
+   Openings — Chessboard Viewer
+   ======================================== */
+
+.chessboard-viewer {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+.moves-display h4 {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.moves-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.moves-empty {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.move-notation {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  transition: background 0.15s, color 0.15s;
+}
+
+.move-played {
+  background: var(--color-primary);
+  color: white;
+}
+
+.move-current {
+  background: var(--color-primary-hover);
+  color: white;
+  font-weight: 600;
+}
+
+.moves-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.moves-counter {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  min-width: 4rem;
+  text-align: center;
+}
+
+/* ========================================
+   Responsive — Openings
+   ======================================== */
+
+@media (max-width: 768px) {
+  .openings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .opening-detail-content {
+    grid-template-columns: 1fr;
+  }
+}

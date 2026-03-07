@@ -1,6 +1,6 @@
 # Feature : Navigation Publique des Ouvertures
 
-> 📝 **Statut** : Ready
+> 📝 **Statut** : Implemented
 > 
 > 📅 **Date de création** : 2026-02-15
 > 
@@ -12,10 +12,10 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 
 ## 🎯 Objectifs
 
-- [ ] Afficher une liste des ouvertures publiques accessibles à tous
-- [ ] Permettre la consultation détaillée d'une ouverture avec échiquier interactif
-- [ ] Encourager l'inscription sans bloquer l'accès au contenu public
-- [ ] Offrir une expérience fluide et engageante pour les visiteurs
+- [x] Afficher une liste des ouvertures publiques accessibles à tous
+- [x] Permettre la consultation détaillée d'une ouverture avec échiquier interactif
+- [x] Encourager l'inscription sans bloquer l'accès au contenu public
+- [x] Offrir une expérience fluide et engageante pour les visiteurs
 
 ## 👥 User Stories
 
@@ -295,14 +295,14 @@ interface PageResponse<T> {
 
 ## ✅ Definition of Done
 
-- [ ] Endpoint `/api/public/openings` retourne les ouvertures publiques paginées
-- [ ] Endpoint `/api/public/openings/{id}` retourne le détail d'une ouverture
-- [ ] Tests unitaires du service (>80% couverture)
-- [ ] Tests d'intégration des endpoints
-- [ ] Page liste des ouvertures responsive et fonctionnelle
-- [ ] Page détail avec échiquier de base (peut être simplifié si Feature 004 en cours)
-- [ ] Recherche fonctionnelle avec debounce
-- [ ] CTA d'inscription visible et non intrusif
+- [x] Endpoint `/api/public/openings` retourne les ouvertures publiques paginées
+- [x] Endpoint `/api/public/openings/{id}` retourne le détail d'une ouverture
+- [x] Tests unitaires du service (>80% couverture)
+- [x] Tests d'intégration des endpoints
+- [x] Page liste des ouvertures responsive et fonctionnelle
+- [x] Page détail avec échiquier de base (peut être simplifié si Feature 004 en cours)
+- [x] Recherche fonctionnelle avec debounce
+- [x] CTA d'inscription visible et non intrusif
 - [ ] Tests E2E du parcours de navigation
-- [ ] Documentation API OpenAPI générée
+- [x] Documentation API OpenAPI générée
 
