@@ -104,8 +104,8 @@ Permettre aux utilisateurs de rechercher et filtrer les ouvertures par différen
 
 | Méthode | Endpoint | Description | Auth |
 |---------|----------|-------------|------|
-| GET | `/api/public/openings/search` | Recherche avancée publique | ❌ |
-| GET | `/api/openings/search` | Recherche avancée personnelle | ✅ |
+| GET | `/api/v1/public/openings/search` | Recherche avancée publique | ❌ |
+| GET | `/api/v1/openings/search` | Recherche avancée personnelle | ✅ |
 
 **Query Parameters :**
 ```

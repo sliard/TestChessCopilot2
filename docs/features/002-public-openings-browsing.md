@@ -88,9 +88,9 @@ Opening
 #### Endpoints API
 | Méthode | Endpoint | Description | Auth |
 |---------|----------|-------------|------|
-| GET | `/api/public/openings` | Liste paginée des ouvertures publiques | ❌ |
-| GET | `/api/public/openings/{id}` | Détail d'une ouverture publique | ❌ |
-| GET | `/api/public/openings/search?q={query}` | Recherche d'ouvertures publiques | ❌ |
+| GET | `/api/v1/public/openings` | Liste paginée des ouvertures publiques | ❌ |
+| GET | `/api/v1/public/openings/{id}` | Détail d'une ouverture publique | ❌ |
+| GET | `/api/v1/public/openings/search?q={query}` | Recherche d'ouvertures publiques | ❌ |
 
 #### DTOs
 ```java
@@ -295,8 +295,8 @@ interface PageResponse<T> {
 
 ## ✅ Definition of Done
 
-- [x] Endpoint `/api/public/openings` retourne les ouvertures publiques paginées
-- [x] Endpoint `/api/public/openings/{id}` retourne le détail d'une ouverture
+- [x] Endpoint `/api/v1/public/openings` retourne les ouvertures publiques paginées
+- [x] Endpoint `/api/v1/public/openings/{id}` retourne le détail d'une ouverture
 - [x] Tests unitaires du service (>80% couverture)
 - [x] Tests d'intégration des endpoints
 - [x] Page liste des ouvertures responsive et fonctionnelle

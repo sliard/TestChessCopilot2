@@ -52,11 +52,11 @@ EntityName
 #### Endpoints API
 | Méthode | Endpoint | Description | Auth |
 |---------|----------|-------------|------|
-| GET | `/api/resource` | Liste des ressources | ✅ |
-| POST | `/api/resource` | Créer une ressource | ✅ |
-| GET | `/api/resource/{id}` | Détail d'une ressource | ✅ |
-| PUT | `/api/resource/{id}` | Modifier une ressource | ✅ |
-| DELETE | `/api/resource/{id}` | Supprimer une ressource | ✅ |
+| GET | `/api/v1/resource` | Liste des ressources | ✅ |
+| POST | `/api/v1/resource` | Créer une ressource | ✅ |
+| GET | `/api/v1/resource/{id}` | Détail d'une ressource | ✅ |
+| PUT | `/api/v1/resource/{id}` | Modifier une ressource | ✅ |
+| DELETE | `/api/v1/resource/{id}` | Supprimer une ressource | ✅ |
 
 #### Services
 - `ResourceService` : Logique métier principale

@@ -84,11 +84,11 @@ User
 #### Endpoints API
 | Méthode | Endpoint | Description | Auth |
 |---------|----------|-------------|------|
-| POST | `/api/auth/register` | Inscription | ❌ |
-| POST | `/api/auth/login` | Connexion | ❌ |
-| POST | `/api/auth/refresh` | Rafraîchir token | ❌ |
-| POST | `/api/auth/logout` | Déconnexion | ✅ |
-| GET | `/api/auth/me` | Profil utilisateur | ✅ |
+| POST | `/api/v1/auth/register` | Inscription | ❌ |
+| POST | `/api/v1/auth/login` | Connexion | ❌ |
+| POST | `/api/v1/auth/refresh` | Rafraîchir token | ❌ |
+| POST | `/api/v1/auth/logout` | Déconnexion | ✅ |
+| GET | `/api/v1/auth/me` | Profil utilisateur | ✅ |
 
 #### DTOs
 ```java
