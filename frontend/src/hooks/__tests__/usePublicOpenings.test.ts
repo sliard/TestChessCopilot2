@@ -20,9 +20,10 @@ describe('usePublicOpenings', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.openings).toHaveLength(2);
+    expect(result.current.openings).toHaveLength(3);
     expect(result.current.openings[0].name).toBe('Défense Sicilienne');
     expect(result.current.openings[1].name).toBe('Ruy Lopez');
+    expect(result.current.openings[2].name).toBe('Défense Française');
     expect(result.current.error).toBeNull();
   });
 
@@ -34,7 +35,7 @@ describe('usePublicOpenings', () => {
     });
 
     expect(result.current.page).not.toBeNull();
-    expect(result.current.page!.totalElements).toBe(2);
+    expect(result.current.page!.totalElements).toBe(3);
     expect(result.current.page!.totalPages).toBe(1);
     expect(result.current.page!.first).toBe(true);
     expect(result.current.page!.last).toBe(true);
@@ -47,8 +48,37 @@ describe('usePublicOpenings', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.openings.length).toBeGreaterThanOrEqual(1);
+    expect(result.current.openings).toHaveLength(1);
     expect(result.current.openings[0].name).toBe('Défense Sicilienne');
+  });
+
+  it('should pass ecoCode to service', async () => {
+    const { result } = renderHook(() =>
+      usePublicOpenings(0, undefined, 'B'),
+    );
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.openings).toHaveLength(1);
+    expect(result.current.openings[0].ecoCode).toBe('B20');
+  });
+
+  it('should pass sort and order to service', async () => {
+    const { result } = renderHook(() =>
+      usePublicOpenings(0, undefined, undefined, undefined, 'name', 'asc'),
+    );
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.openings).toHaveLength(3);
+    // name asc: Défense Française < Défense Sicilienne < Ruy Lopez
+    expect(result.current.openings[0].name).toBe('Défense Française');
+    expect(result.current.openings[1].name).toBe('Défense Sicilienne');
+    expect(result.current.openings[2].name).toBe('Ruy Lopez');
   });
 
   it('should refetch when refetch called', async () => {
@@ -58,7 +88,7 @@ describe('usePublicOpenings', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.openings).toHaveLength(2);
+    expect(result.current.openings).toHaveLength(3);
 
     // Call refetch
     result.current.refetch();
@@ -67,7 +97,7 @@ describe('usePublicOpenings', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.openings).toHaveLength(2);
+    expect(result.current.openings).toHaveLength(3);
     expect(result.current.error).toBeNull();
   });
 

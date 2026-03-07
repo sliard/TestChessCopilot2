@@ -44,6 +44,14 @@ public class PublicOpeningServiceImpl implements PublicOpeningService {
         return PageResponse.from(page);
     }
 
+    @Override
+    public PageResponse<OpeningListItemResponse> searchPublicOpenings(
+            String query, String ecoCode, String moves, Pageable pageable) {
+        var page = openingRepository.searchPublicOpenings(query, ecoCode, moves, pageable)
+                .map(this::toListItemResponse);
+        return PageResponse.from(page);
+    }
+
     private OpeningListItemResponse toListItemResponse(Opening opening) {
         return new OpeningListItemResponse(
                 opening.getId(),

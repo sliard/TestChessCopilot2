@@ -14,4 +14,7 @@ public interface PublicOpeningService {
     OpeningDetailResponse getPublicOpening(UUID id);
 
     PageResponse<OpeningListItemResponse> searchPublicOpenings(String query, Pageable pageable);
+
+    PageResponse<OpeningListItemResponse> searchPublicOpenings(
+        String query, String ecoCode, String moves, Pageable pageable);
 }

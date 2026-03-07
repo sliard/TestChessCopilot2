@@ -1,6 +1,6 @@
 # Feature : Recherche et Filtrage des Ouvertures
 
-> 📝 **Statut** : Ready
+> 📝 **Statut** : Implémenté (public)
 > 
 > 📅 **Date de création** : 2026-02-15
 > 
@@ -483,18 +483,25 @@ const updateFilters = (newFilters: Partial<SearchFilters>) => {
 
 ## ✅ Definition of Done
 
-- [ ] Endpoint de recherche publique implémenté
+- [x] Endpoint de recherche publique implémenté
 - [ ] Endpoint de recherche personnelle implémenté
-- [ ] Index PostgreSQL créés pour performance
+- [x] Index PostgreSQL créés pour performance
 - [ ] Tests unitaires des services de recherche (>80%)
 - [ ] Tests d'intégration des endpoints
-- [ ] Composant SearchFiltersBar fonctionnel
-- [ ] Debounce implémenté sur recherche textuelle
-- [ ] Filtres combinables (recherche + ECO + coups)
-- [ ] Tri des résultats opérationnel
-- [ ] Réinitialisation des filtres fonctionnelle
+- [x] Composant SearchFiltersBar fonctionnel
+- [x] Debounce implémenté sur recherche textuelle
+- [x] Filtres combinables (recherche + ECO + coups)
+- [x] Tri des résultats opérationnel
+- [x] Réinitialisation des filtres fonctionnelle
 - [ ] Responsive (desktop et mobile)
-- [ ] Persistence des filtres dans l'URL
+- [x] Persistence des filtres dans l'URL
 - [ ] Tests E2E des scénarios de recherche
-- [ ] Documentation API OpenAPI
+- [x] Documentation API OpenAPI
+
+## 📅 Historique
+
+| Date | Événement | Détails |
+|------|-----------|---------|
+| 2026-02-15 | Création | Spec initiale rédigée |
+| 2026-03-07 | Implémentation (public) | Endpoints publics (`/api/v1/public/openings` et `/api/v1/public/openings/search`) implémentés avec paramètres `q`, `ecoCode`, `moves`, `sort`, `order`. Migration V3 avec index trigram, préfixe et composite. Frontend : `SearchFiltersBar`, `EcoCodeFilter`, `SortDropdown`, `ActiveFilters` avec debounce 300ms, persistence URL via `useSearchParams`, et hook `usePublicOpenings` mis à jour. Endpoint personnel (auth) et tests restent à faire. |
 

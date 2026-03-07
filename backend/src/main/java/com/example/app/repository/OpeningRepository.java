@@ -24,4 +24,16 @@ public interface OpeningRepository extends JpaRepository<Opening, UUID> {
 
     @EntityGraph(attributePaths = {"user"})
     Optional<Opening> findByIdAndIsPublicTrue(UUID id);
+
+    @EntityGraph(attributePaths = {"user"})
+    @Query("SELECT o FROM Opening o WHERE o.isPublic = true " +
+           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%')) " +
+           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%'))")
+    Page<Opening> searchPublicOpenings(
+        @Param("query") String query,
+        @Param("ecoCode") String ecoCode,
+        @Param("moves") String moves,
+        Pageable pageable
+    );
 }

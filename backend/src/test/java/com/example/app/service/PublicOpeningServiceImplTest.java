@@ -28,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -295,5 +296,85 @@ class PublicOpeningServiceImplTest {
 
         // Assert
         assertThat(result.content().get(0).movesCount()).isZero();
+    }
+
+    // ========== searchPublicOpenings (with ecoCode/moves filters) ==========
+
+    @Test
+    void should_returnFilteredResults_when_searchWithEcoCode() {
+        // Arrange
+        Page<Opening> searchPage = new PageImpl<>(List.of(testOpening), pageable, 1);
+        when(openingRepository.searchPublicOpenings(isNull(), eq("B20"), isNull(), eq(pageable)))
+                .thenReturn(searchPage);
+
+        // Act
+        PageResponse<OpeningListItemResponse> result =
+                publicOpeningService.searchPublicOpenings(null, "B20", null, pageable);
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).ecoCode()).isEqualTo("B20");
+        assertThat(result.totalElements()).isEqualTo(1);
+        verify(openingRepository).searchPublicOpenings(isNull(), eq("B20"), isNull(), eq(pageable));
+    }
+
+    @Test
+    void should_returnFilteredResults_when_searchWithMoves() {
+        // Arrange
+        Page<Opening> searchPage = new PageImpl<>(List.of(testOpening), pageable, 1);
+        when(openingRepository.searchPublicOpenings(isNull(), isNull(), eq("1.e4 c5"), eq(pageable)))
+                .thenReturn(searchPage);
+
+        // Act
+        PageResponse<OpeningListItemResponse> result =
+                publicOpeningService.searchPublicOpenings(null, null, "1.e4 c5", pageable);
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).name()).isEqualTo("Sicilian Defense");
+        assertThat(result.totalElements()).isEqualTo(1);
+        verify(openingRepository).searchPublicOpenings(isNull(), isNull(), eq("1.e4 c5"), eq(pageable));
+    }
+
+    @Test
+    void should_returnFilteredResults_when_searchWithCombinedFilters() {
+        // Arrange
+        Page<Opening> searchPage = new PageImpl<>(List.of(testOpening), pageable, 1);
+        when(openingRepository.searchPublicOpenings(eq("Sicilian"), eq("B20"), eq("1.e4 c5"), eq(pageable)))
+                .thenReturn(searchPage);
+
+        // Act
+        PageResponse<OpeningListItemResponse> result =
+                publicOpeningService.searchPublicOpenings("Sicilian", "B20", "1.e4 c5", pageable);
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).name()).isEqualTo("Sicilian Defense");
+        assertThat(result.content().get(0).ecoCode()).isEqualTo("B20");
+        assertThat(result.totalElements()).isEqualTo(1);
+        verify(openingRepository).searchPublicOpenings(eq("Sicilian"), eq("B20"), eq("1.e4 c5"), eq(pageable));
+    }
+
+    @Test
+    void should_returnFilteredResults_when_searchWithQueryAndEcoCode() {
+        // Arrange
+        Page<Opening> searchPage = new PageImpl<>(List.of(testOpening), pageable, 1);
+        when(openingRepository.searchPublicOpenings(eq("Sicilian"), eq("B20"), isNull(), eq(pageable)))
+                .thenReturn(searchPage);
+
+        // Act
+        PageResponse<OpeningListItemResponse> result =
+                publicOpeningService.searchPublicOpenings("Sicilian", "B20", null, pageable);
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).name()).isEqualTo("Sicilian Defense");
+        assertThat(result.content().get(0).ecoCode()).isEqualTo("B20");
+        assertThat(result.totalElements()).isEqualTo(1);
+        verify(openingRepository).searchPublicOpenings(eq("Sicilian"), eq("B20"), isNull(), eq(pageable));
     }
 }

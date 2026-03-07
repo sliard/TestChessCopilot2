@@ -14,6 +14,10 @@ interface UsePublicOpeningsResult {
 export const usePublicOpenings = (
   currentPage = 0,
   search?: string,
+  ecoCode?: string,
+  moves?: string,
+  sort?: string,
+  order?: string,
   size = 20,
 ): UsePublicOpeningsResult => {
   const [page, setPage] = useState<Page<OpeningListItem> | null>(null);
@@ -24,16 +28,22 @@ export const usePublicOpenings = (
     setLoading(true);
     setError(null);
     try {
-      const result = search
-        ? await publicOpeningService.searchPublicOpenings(search, currentPage, size)
-        : await publicOpeningService.getPublicOpenings(currentPage, size);
+      const result = await publicOpeningService.getPublicOpenings({
+        q: search,
+        ecoCode,
+        moves,
+        sort,
+        order,
+        page: currentPage,
+        size,
+      });
       setPage(result);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Erreur inconnue'));
     } finally {
       setLoading(false);
     }
-  }, [currentPage, search, size]);
+  }, [currentPage, search, ecoCode, moves, sort, order, size]);
 
   useEffect(() => {
     fetchOpenings();

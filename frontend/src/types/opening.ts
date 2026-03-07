@@ -18,3 +18,20 @@ export interface OpeningDetail {
   createdAt: string;
   updatedAt: string;
 }
+
+export type SortField = 'createdAt' | 'updatedAt' | 'name';
+export type SortOrder = 'asc' | 'desc';
+
+export interface SortOption {
+  field: SortField;
+  order: SortOrder;
+  label: string;
+}
+
+export interface SearchFilters {
+  q?: string;
+  ecoCode?: string;
+  moves?: string;
+  sort: SortField;
+  order: SortOrder;
+}

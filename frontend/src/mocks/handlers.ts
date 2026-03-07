@@ -37,6 +37,15 @@ const mockOpenings = [
     author: 'Système',
     createdAt: '2026-01-14T10:00:00Z',
   },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440003',
+    name: 'Défense Française',
+    description: 'Ouverture solide et stratégique',
+    ecoCode: 'C00',
+    movesCount: 2,
+    author: 'Système',
+    createdAt: '2026-01-13T10:00:00Z',
+  },
 ];
 
 const mockOpeningDetail = {
@@ -135,23 +144,46 @@ export const handlers = [
   http.get(`${API_URL}/v1/public/openings`, ({ request }) => {
     const url = new URL(request.url);
     const q = url.searchParams.get('q');
-    if (q === 'nonexistent') {
-      return HttpResponse.json({
-        content: [],
-        page: 0,
-        size: 20,
-        totalElements: 0,
-        totalPages: 0,
-        first: true,
-        last: true,
+    const ecoCode = url.searchParams.get('ecoCode');
+    const moves = url.searchParams.get('moves');
+    const sort = url.searchParams.get('sort');
+    const order = url.searchParams.get('order');
+
+    let filtered = [...mockOpenings];
+
+    if (q) {
+      const lower = q.toLowerCase();
+      filtered = filtered.filter((o) => o.name.toLowerCase().includes(lower));
+    }
+    if (ecoCode) {
+      const upperCode = ecoCode.toUpperCase();
+      filtered = filtered.filter((o) => o.ecoCode.toUpperCase().startsWith(upperCode));
+    }
+    if (moves) {
+      filtered = filtered.filter((o) => o.movesCount >= Number(moves));
+    }
+
+    if (sort) {
+      const dir = order === 'asc' ? 1 : -1;
+      filtered.sort((a, b) => {
+        const valA = a[sort as keyof typeof a];
+        const valB = b[sort as keyof typeof b];
+        if (typeof valA === 'string' && typeof valB === 'string') {
+          return dir * valA.localeCompare(valB);
+        }
+        if (typeof valA === 'number' && typeof valB === 'number') {
+          return dir * (valA - valB);
+        }
+        return 0;
       });
     }
+
     return HttpResponse.json({
-      content: mockOpenings,
+      content: filtered,
       page: 0,
       size: 20,
-      totalElements: 2,
-      totalPages: 1,
+      totalElements: filtered.length,
+      totalPages: filtered.length > 0 ? 1 : 0,
       first: true,
       last: true,
     });
