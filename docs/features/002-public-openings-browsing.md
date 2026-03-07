@@ -8,30 +8,42 @@
 
 ## 📋 Résumé
 
-Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvertures publiques en mode lecture seule. Cette feature constitue le point d'entrée principal de l'application et doit inciter les visiteurs à s'inscrire pour débloquer les fonctionnalités avancées.
+Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvertures publiques en mode lecture seule, via les routes `/openings` et `/openings/:id`. La route `/` joue le rôle de landing page mixte et informative (connecté ou non connecté) pour présenter le service et orienter vers la navigation publique. Cette feature constitue le point d'entrée principal de l'application et doit inciter les visiteurs à s'inscrire pour débloquer les fonctionnalités avancées.
 
 ## 🎯 Objectifs
 
-- [x] Afficher une liste des ouvertures publiques accessibles à tous
+- [x] Proposer une landing page `/` informative et accessible à tous (connecté ou non connecté)
+- [x] Afficher une liste des ouvertures publiques accessibles à tous sur `/openings`
 - [x] Permettre la consultation détaillée d'une ouverture avec échiquier interactif
 - [x] Encourager l'inscription sans bloquer l'accès au contenu public
 - [x] Offrir une expérience fluide et engageante pour les visiteurs
 
 ## 👥 User Stories
 
-### US1 : Liste des ouvertures publiques
+### US1 : Landing publique informative
+**En tant que** visiteur (anonyme ou connecté),  
+**je veux** voir une page d'accueil qui présente clairement la valeur du service,  
+**afin de** comprendre rapidement ce que propose l'application et où commencer.
+
+**Critères d'acceptation :**
+- [x] La route `/` affiche une présentation concise du service (positionnement, valeur, usage)
+- [x] Le contenu principal reste informatif pour tous, sans dépendre de l'authentification
+- [x] Des call-to-action non bloquants orientent vers `/openings` et vers l'inscription/connexion
+- [x] La navigation vers `/openings` est visible et accessible immédiatement
+
+### US2 : Liste des ouvertures publiques
 **En tant que** visiteur anonyme,  
 **je veux** voir la liste des ouvertures publiques disponibles,  
 **afin de** découvrir les ouvertures classiques et décider lesquelles m'intéressent.
 
 **Critères d'acceptation :**
-- [x] La page d'accueil affiche une liste paginée des ouvertures publiques
+- [x] La page `/openings` affiche une liste paginée des ouvertures publiques
 - [x] Chaque ouverture affiche : nom, description courte, code ECO, nombre de coups, auteur (si utilisateur public)
 - [x] Les ouvertures sont triées par popularité ou date de création
 - [x] La pagination fonctionne (20 ouvertures par page)
 - [x] Temps de chargement < 500ms
 
-### US2 : Consultation d'une ouverture
+### US3 : Consultation d'une ouverture
 **En tant que** visiteur anonyme,  
 **je veux** consulter le détail d'une ouverture publique avec visualisation sur échiquier,  
 **afin de** comprendre les coups et la logique de l'ouverture.
@@ -44,7 +56,7 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 - [x] Notation algébrique visible pour chaque coup
 - [x] Responsive (desktop et mobile)
 
-### US3 : Incitation à l'inscription
+### US4 : Incitation à l'inscription
 **En tant que** visiteur anonyme,  
 **je veux** être informé des fonctionnalités disponibles avec un compte,  
 **afin de** comprendre l'intérêt de m'inscrire.
@@ -55,7 +67,7 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 - [x] Lien vers la page d'inscription
 - [x] Non intrusif (peut être fermé)
 
-### US4 : Recherche basique
+### US5 : Recherche basique
 **En tant que** visiteur anonyme,  
 **je veux** rechercher une ouverture par son nom,  
 **afin de** trouver rapidement ce qui m'intéresse.
@@ -131,6 +143,11 @@ PageResponse<T>(
 
 ### Frontend
 
+#### Landing `/`
+- `HomePage` : page d'accueil informative pour présenter le service
+- Contenu principal accessible à tous (connecté/non connecté)
+- CTA non bloquants vers `OpeningsListPage`, `LoginPage` et `RegisterPage`
+
 #### Composants
 - `OpeningList` : Liste paginée avec cards d'ouvertures
   - Props: openings, pagination, onPageChange
@@ -146,8 +163,8 @@ PageResponse<T>(
 #### Routes
 | Route | Composant | Description |
 |-------|-----------|-------------|
-| `/` | HomePage | Redirection vers /openings |
-| `/openings` | OpeningsListPage | Liste des ouvertures publiques |
+| `/` | HomePage | Landing mixte informative: présente le service et oriente vers la navigation publique |
+| `/openings` | OpeningsListPage | Liste paginée des ouvertures publiques |
 | `/openings/:id` | OpeningDetailPage | Détail d'une ouverture publique |
 
 #### Hooks
@@ -199,7 +216,7 @@ interface PageResponse<T> {
 
 ## 🎨 Maquettes / Wireframes
 
-### Page Liste (Desktop)
+### Page Liste `/openings` (Desktop)
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ ChessOT                    [Recherche...]     [S'inscrire]  │
@@ -288,6 +305,7 @@ interface PageResponse<T> {
 
 ## 📝 Notes
 
+- 2026-03-08 : Clarification documentaire de la feature pour distinguer explicitement la landing `/` (informative pour tous) de la navigation publique `/openings`, sans changement de périmètre produit.
 - Le composant échiquier sera réutilisé dans d'autres features (003, 004)
 - Prévoir l'ajout de filtres avancés dans une prochaine version (niveau, popularité)
 - Considérer un système de tags/catégories pour mieux organiser les ouvertures
@@ -295,6 +313,7 @@ interface PageResponse<T> {
 
 ## ✅ Definition of Done
 
+- [x] Route `/` disponible comme landing informative et accessible à tous
 - [x] Endpoint `/api/v1/public/openings` retourne les ouvertures publiques paginées
 - [x] Endpoint `/api/v1/public/openings/{id}` retourne le détail d'une ouverture
 - [x] Tests unitaires du service (>80% couverture)
