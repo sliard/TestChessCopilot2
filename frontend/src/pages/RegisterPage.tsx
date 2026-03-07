@@ -1,6 +1,34 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { ApiClientError } from '../services/apiClient';
+
+const validatePassword = (pwd: string): string[] => {
+  const errors: string[] = [];
+  if (pwd.length < 8) {
+    errors.push('Le mot de passe doit contenir au moins 8 caractères');
+  }
+  if (!/[A-Z]/.test(pwd)) {
+    errors.push('Le mot de passe doit contenir au moins une majuscule');
+  }
+  if (!/\d/.test(pwd)) {
+    errors.push('Le mot de passe doit contenir au moins un chiffre');
+  }
+  return errors;
+};
+
+const parseFieldErrors = (errors: string[]): Record<string, string> => {
+  const result: Record<string, string> = {};
+  for (const error of errors) {
+    const colonIndex = error.indexOf(':');
+    if (colonIndex > 0) {
+      const field = error.substring(0, colonIndex).trim();
+      const message = error.substring(colonIndex + 1).trim();
+      result[field] = message;
+    }
+  }
+  return result;
+};
 
 export const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +37,8 @@ export const RegisterPage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { register } = useAuth();
@@ -17,14 +47,17 @@ export const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
+    setPasswordErrors([]);
 
-    if (password !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
+    const pwdErrors = validatePassword(password);
+    if (pwdErrors.length > 0) {
+      setPasswordErrors(pwdErrors);
       return;
     }
 
-    if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caractères');
+    if (password !== confirmPassword) {
+      setFieldErrors({ confirmPassword: 'Les mots de passe ne correspondent pas' });
       return;
     }
 
@@ -34,7 +67,11 @@ export const RegisterPage: React.FC = () => {
       await register({ email, password, firstName, lastName });
       navigate('/dashboard');
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erreur lors de l'inscription");
+      if (err instanceof ApiClientError && err.errors?.length) {
+        setFieldErrors(parseFieldErrors(err.errors));
+      } else {
+        setError(err instanceof Error ? err.message : "Erreur lors de l'inscription");
+      }
     } finally {
       setLoading(false);
     }
@@ -60,6 +97,7 @@ export const RegisterPage: React.FC = () => {
                 required
                 autoComplete="given-name"
               />
+              {fieldErrors.firstName && <span className="field-error">{fieldErrors.firstName}</span>}
             </div>
 
             <div className="form-group">
@@ -73,6 +111,7 @@ export const RegisterPage: React.FC = () => {
                 required
                 autoComplete="family-name"
               />
+              {fieldErrors.lastName && <span className="field-error">{fieldErrors.lastName}</span>}
             </div>
           </div>
 
@@ -87,6 +126,7 @@ export const RegisterPage: React.FC = () => {
               required
               autoComplete="email"
             />
+            {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
           </div>
 
           <div className="form-group">
@@ -96,11 +136,19 @@ export const RegisterPage: React.FC = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minimum 8 caractères"
+              placeholder="Minimum 8 caractères, 1 majuscule, 1 chiffre"
               required
               minLength={8}
               autoComplete="new-password"
             />
+            {passwordErrors.length > 0 && (
+              <ul className="field-error-list">
+                {passwordErrors.map((msg) => (
+                  <li key={msg} className="field-error">{msg}</li>
+                ))}
+              </ul>
+            )}
+            {fieldErrors.password && <span className="field-error">{fieldErrors.password}</span>}
           </div>
 
           <div className="form-group">
@@ -115,6 +163,7 @@ export const RegisterPage: React.FC = () => {
               minLength={8}
               autoComplete="new-password"
             />
+            {fieldErrors.confirmPassword && <span className="field-error">{fieldErrors.confirmPassword}</span>}
           </div>
 
           <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
