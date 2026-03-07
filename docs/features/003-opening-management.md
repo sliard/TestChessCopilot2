@@ -10,6 +10,38 @@
 
 Permettre aux utilisateurs authentifiés de créer, modifier, supprimer et gérer leurs propres ouvertures. Les utilisateurs peuvent choisir de rendre leurs ouvertures publiques (visibles par tous) ou privées (visibles uniquement par eux-mêmes).
 
+## ✅ Statut d'implémentation
+
+### Consultation publique (implémenté ✅)
+
+La consultation publique des ouvertures est entièrement implémentée :
+
+**Backend :**
+- `PublicOpeningController` — 3 endpoints REST sous `/api/v1/public/openings`
+  - `GET /` — Liste paginée (tri par date de création décroissante)
+  - `GET /{id}` — Détail d'une ouverture publique
+  - `GET /search?q=` — Recherche par nom (insensible à la casse)
+- `PublicOpeningService` / `PublicOpeningServiceImpl` — Logique métier avec mapping DTO
+- `OpeningRepository` — Requêtes JPA avec `@EntityGraph` pour éviter les N+1
+- DTOs : `OpeningListItemResponse`, `OpeningDetailResponse`, `PageResponse<T>`
+- Endpoints publics (`permitAll()`) — aucune authentification requise
+
+**Frontend :**
+- `OpeningsListPage` — Grille de cartes avec recherche, pagination et CTA inscription
+- `OpeningDetailPage` — Détail avec visualiseur de coups, description, badge ECO
+- Composants : `OpeningCard`, `SearchBar`, `Pagination`, `ChessboardViewer`
+- Service API : `publicOpeningService` (typé TypeScript)
+- Hooks : `usePublicOpenings`, `usePublicOpening`
+- Routes : `/openings` (liste), `/openings/:id` (détail)
+
+**Tests :**
+- Backend : 21 tests (service + controller)
+- Frontend : 8 fichiers de tests (pages, composants, hooks)
+
+### CRUD authentifié (à implémenter ⏳)
+
+Les user stories US1 à US6 (création, modification, suppression, visibilité, consultation privée, validation des coups) restent à implémenter.
+
 ## 🎯 Objectifs
 
 - [ ] Permettre la création d'ouvertures personnalisées
