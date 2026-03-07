@@ -38,23 +38,29 @@ Lors de l'initialisation d'un nouveau projet basé sur ce template :
 
 ## 📋 Backlog des Features
 
-### 🔴 À faire (Priorité haute)
+### 🔴 À faire (Priorité haute - MVP)
 
-| Feature | Description | Statut |
-|---------|-------------|--------|
-| - | - | - |
+| Feature | Description | Statut | Spec |
+|---------|-------------|--------|------|
+| Authentification utilisateur | Inscription, connexion, gestion de compte avec JWT | ✅ Ready | [001-user-authentication.md](./features/001-user-authentication.md) |
+| Navigation publique des ouvertures | Consultation des ouvertures publiques sans compte | ✅ Ready | [002-public-openings-browsing.md](./features/002-public-openings-browsing.md) |
+| Gestion des ouvertures | CRUD des ouvertures (privées/publiques) pour utilisateurs connectés | ✅ Ready | [003-opening-management.md](./features/003-opening-management.md) |
+| Échiquier interactif | Visualisation et navigation dans les coups d'une ouverture | ✅ Ready | [004-interactive-chessboard.md](./features/004-interactive-chessboard.md) |
 
-### 🟡 Planifié
+### 🟡 Planifié (Post-MVP)
 
-| Feature | Description | Statut |
-|---------|-------------|--------|
-| - | - | - |
+| Feature | Description | Statut | Spec |
+|---------|-------------|--------|------|
+| Recherche et filtrage | Recherche d'ouvertures par nom, code ECO, coups | ✅ Ready | [005-search-filtering.md](./features/005-search-filtering.md) |
+| Collections personnelles | Organisation des ouvertures en répertoires | 📝 Draft | - |
+| Système de notation | Ajout de notes et commentaires sur les positions | 📝 Draft | - |
+| Mode entraînement | Entraînement avec répétition espacée | 📝 Draft | - |
 
 ### 🟢 Terminé
 
 | Feature | Description | Date |
 |---------|-------------|------|
-| - | - | - |
+| - | Aucune feature terminée pour le moment | - |
 
 ## 📖 Conventions
 
