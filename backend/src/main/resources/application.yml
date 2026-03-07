@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: app
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:app_database}
+    username: ${POSTGRES_USER:app_user}
+    password: ${POSTGRES_PASSWORD:change_me_in_production}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${SERVER_PORT:8080}
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:}
+  access-token-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:900000}
+  refresh-token-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+# Application info (exposed via /actuator/info)
+info:
+  app:
+    name: ${spring.application.name}
+    version: '@project.version@'
+    java-version: ${java.version}
+
