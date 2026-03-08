@@ -31,7 +31,7 @@ export const useChessboard = (moves: string): UseChessboardResult => {
 
   const position = useMemo(() => {
     if (currentMoveIndex < 0) {
-      return 'start';
+      return 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
     }
     const chess = new Chess();
     for (let i = 0; i <= currentMoveIndex && i < parsedMoves.length; i++) {
