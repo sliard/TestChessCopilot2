@@ -1,0 +1,75 @@
+{
+  "app": {
+    "name": "Chess Training",
+    "tagline": "Master your openings"
+  },
+  "nav": {
+    "home": "Home",
+    "openings": "Openings",
+    "myOpenings": "My Openings",
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "profile": "Profile"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "clear": "Clear",
+    "submit": "Submit",
+    "loading": "Loading..."
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} of {{total}}",
+    "showing": "Showing {{from}} to {{to}} of {{total}} results"
+  },
+  "language": {
+    "select": "Select language",
+    "en": "English",
+    "fr": "French"
+  },
+  "landing": {
+    "hero": {
+      "title": "Master chess openings",
+      "subtitle": "Explore, learn and practice classic and modern openings with our interactive library.",
+      "cta": "Explore openings"
+    },
+    "features": {
+      "library": {
+        "title": "Opening library",
+        "description": "Access a comprehensive collection of openings classified by ECO code, with descriptions and variations."
+      },
+      "chessboard": {
+        "title": "Interactive chessboard",
+        "description": "Visualize each opening move by move on an interactive chessboard with intuitive navigation."
+      },
+      "progress": {
+        "title": "Personal progress",
+        "description": "Create your own repertoires, save your favorite openings and track your progress."
+      }
+    },
+    "preview": {
+      "title": "Popular openings",
+      "subtitle": "Discover some of the most played openings in the world."
+    },
+    "cta": {
+      "title": "Ready to improve?",
+      "subtitle": "Create your free account and start building your opening repertoire.",
+      "button": "Sign up for free"
+    },
+    "authenticated": {
+      "welcome": "Hello {{firstName}}!",
+      "dashboardLink": "Go to dashboard"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Chess Training. All rights reserved."
+  }
+}

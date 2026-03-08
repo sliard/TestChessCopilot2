@@ -1,0 +1,34 @@
+{
+  "list": {
+    "title": "Ouvertures d'échecs",
+    "empty": "Aucune ouverture trouvée",
+    "searchPlaceholder": "Rechercher une ouverture..."
+  },
+  "detail": {
+    "moves": "Coups",
+    "description": "Description",
+    "ecoCode": "Code ECO",
+    "createdBy": "Créé par",
+    "createdAt": "Créé le"
+  },
+  "form": {
+    "createTitle": "Créer une ouverture",
+    "editTitle": "Modifier l'ouverture",
+    "name": "Nom de l'ouverture",
+    "namePlaceholder": "ex : Défense sicilienne",
+    "description": "Description",
+    "descriptionPlaceholder": "Décrivez cette ouverture...",
+    "moves": "Coups (notation PGN)",
+    "movesPlaceholder": "1. e4 c5 2. Cf3...",
+    "isPublic": "Rendre cette ouverture publique",
+    "success": {
+      "created": "Ouverture créée avec succès",
+      "updated": "Ouverture mise à jour avec succès",
+      "deleted": "Ouverture supprimée avec succès"
+    }
+  },
+  "cta": {
+    "register": "Créez un compte pour sauvegarder vos ouvertures favorites et créer les vôtres !",
+    "registerButton": "S'inscrire gratuitement"
+  }
+}

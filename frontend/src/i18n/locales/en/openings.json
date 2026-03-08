@@ -1,0 +1,34 @@
+{
+  "list": {
+    "title": "Chess Openings",
+    "empty": "No openings found",
+    "searchPlaceholder": "Search openings..."
+  },
+  "detail": {
+    "moves": "Moves",
+    "description": "Description",
+    "ecoCode": "ECO Code",
+    "createdBy": "Created by",
+    "createdAt": "Created on"
+  },
+  "form": {
+    "createTitle": "Create Opening",
+    "editTitle": "Edit Opening",
+    "name": "Opening name",
+    "namePlaceholder": "e.g., Sicilian Defense",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe this opening...",
+    "moves": "Moves (PGN notation)",
+    "movesPlaceholder": "1. e4 c5 2. Nf3...",
+    "isPublic": "Make this opening public",
+    "success": {
+      "created": "Opening created successfully",
+      "updated": "Opening updated successfully",
+      "deleted": "Opening deleted successfully"
+    }
+  },
+  "cta": {
+    "register": "Create an account to save your favorite openings and create your own!",
+    "registerButton": "Sign Up Free"
+  }
+}
