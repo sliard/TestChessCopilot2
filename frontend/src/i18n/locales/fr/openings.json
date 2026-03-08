@@ -30,5 +30,42 @@
   "cta": {
     "register": "Créez un compte pour sauvegarder vos ouvertures favorites et créer les vôtres !",
     "registerButton": "S'inscrire gratuitement"
+  },
+  "myOpenings": {
+    "title": "Mes Ouvertures",
+    "create": "Nouvelle ouverture",
+    "createFirst": "Créer ma première ouverture",
+    "empty": "Aucune ouverture pour l'instant",
+    "emptyHint": "Commencez à construire votre répertoire d'ouvertures !",
+    "noResults": "Aucun résultat pour cette recherche"
+  },
+  "visibility": {
+    "public": "Public",
+    "private": "Privé"
+  },
+  "actions": {
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "create": "Créer",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "confirmDelete": "Supprimer",
+    "back": "Retour",
+    "loading": "Chargement..."
+  },
+  "delete": {
+    "title": "Confirmer la suppression",
+    "message": "Êtes-vous sûr de vouloir supprimer",
+    "warning": "Cette action est irréversible."
+  },
+  "sort": {
+    "newest": "Plus récentes",
+    "oldest": "Plus anciennes",
+    "nameAsc": "Nom A→Z",
+    "nameDesc": "Nom Z→A"
+  },
+  "errors": {
+    "notFound": "Ouverture non trouvée"
   }
 }
