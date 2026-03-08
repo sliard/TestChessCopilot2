@@ -26,9 +26,9 @@ public interface OpeningRepository extends JpaRepository<Opening, UUID> {
     Page<Opening> searchByUserIdAndName(@Param("userId") UUID userId, @Param("query") String query, Pageable pageable);
 
     @Query("SELECT o FROM Opening o WHERE o.isPublic = true " +
-           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))) " +
-           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%')) " +
-           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%'))")
+           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', CAST(:query AS string), '%'))) " +
+           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(CAST(:ecoCode AS string), '%')) " +
+           "AND (:moves IS NULL OR o.moves LIKE CONCAT(CAST(:moves AS string), '%'))")
     Page<Opening> searchPublicOpenings(
         @Param("query") String query,
         @Param("ecoCode") String ecoCode,
@@ -36,9 +36,9 @@ public interface OpeningRepository extends JpaRepository<Opening, UUID> {
         Pageable pageable);
 
     @Query("SELECT o FROM Opening o WHERE o.userId = :userId " +
-           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))) " +
-           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%')) " +
-           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%')) " +
+           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', CAST(:query AS string), '%'))) " +
+           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(CAST(:ecoCode AS string), '%')) " +
+           "AND (:moves IS NULL OR o.moves LIKE CONCAT(CAST(:moves AS string), '%')) " +
            "AND (:isPublic IS NULL OR o.isPublic = :isPublic)")
     Page<Opening> searchUserOpenings(
         @Param("userId") UUID userId,
