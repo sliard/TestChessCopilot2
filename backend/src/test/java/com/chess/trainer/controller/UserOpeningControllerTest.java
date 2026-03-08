@@ -147,7 +147,7 @@ class UserOpeningControllerTest {
     @DisplayName("should_returnOpenings_when_authenticated")
     void should_returnOpenings_when_authenticated() throws Exception {
         // Arrange
-        when(userOpeningService.getUserOpenings(eq(USER_ID), any(), any()))
+        when(userOpeningService.getUserOpenings(eq(USER_ID), any(), any(), any(), any(), any()))
                 .thenReturn(createSamplePageResponse());
 
         // Act & Assert
@@ -158,7 +158,7 @@ class UserOpeningControllerTest {
                 .andExpect(jsonPath("$.content[0].ecoCode").value("B20"))
                 .andExpect(jsonPath("$.totalElements").value(1));
 
-        verify(userOpeningService).getUserOpenings(eq(USER_ID), any(), any());
+        verify(userOpeningService).getUserOpenings(eq(USER_ID), any(), any(), any(), any(), any());
     }
 
     @Test

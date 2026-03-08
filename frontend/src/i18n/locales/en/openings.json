@@ -59,9 +59,36 @@
     "message": "Are you sure you want to delete",
     "warning": "This action cannot be undone."
   },
+  "filter": {
+    "ecoCode": "ECO Code",
+    "ecoCodePlaceholder": "ECO code (e.g., B20)",
+    "clearEcoCode": "Clear ECO code",
+    "movesLabel": "Moves",
+    "movesPlaceholder": "E.g., 1.e4 c5",
+    "clearMoves": "Clear moves",
+    "sortBy": "Sort by",
+    "visibilityLabel": "Visibility",
+    "visibility": {
+      "all": "All",
+      "public": "Public",
+      "private": "Private"
+    },
+    "advancedFilters": "Advanced filters",
+    "reset": "Reset",
+    "results": "{{count}} result",
+    "results_other": "{{count}} results",
+    "removeBadge": "Remove filter {{filter}}",
+    "badges": {
+      "search": "Search",
+      "eco": "ECO",
+      "moves": "Moves",
+      "visibility": "Visibility"
+    }
+  },
   "sort": {
     "newest": "Newest first",
     "oldest": "Oldest first",
+    "recentlyUpdated": "Recently updated",
     "nameAsc": "Name A→Z",
     "nameDesc": "Name Z→A"
   },

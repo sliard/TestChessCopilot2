@@ -41,11 +41,29 @@ public class PublicOpeningServiceImpl implements PublicOpeningService {
         return toDetailResponse(opening);
     }
 
+    private static final List<String> VALID_SORT_FIELDS = List.of("createdAt", "updatedAt", "name");
+
     @Override
-    public PageResponse<OpeningListItemResponse> searchPublicOpenings(String query, int page, int size) {
-        Page<Opening> openings = openingRepository.findByIsPublicTrueAndNameContainingIgnoreCase(
-                query, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt")));
+    public PageResponse<OpeningListItemResponse> searchPublicOpenings(
+            String query, String ecoCode, String moves,
+            String sortBy, String order, int page, int size) {
+
+        String sortField = (sortBy != null && VALID_SORT_FIELDS.contains(sortBy)) ? sortBy : "createdAt";
+        Sort.Direction direction = "asc".equalsIgnoreCase(order) ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sort = Sort.by(direction, sortField);
+
+        String normalizedQuery = normalizeParam(query);
+        String normalizedEcoCode = normalizeParam(ecoCode);
+        String normalizedMoves = normalizeParam(moves);
+
+        Page<Opening> openings = openingRepository.searchPublicOpenings(
+                normalizedQuery, normalizedEcoCode, normalizedMoves,
+                PageRequest.of(page, size, sort));
         return toPageResponse(openings);
+    }
+
+    private String normalizeParam(String value) {
+        return (value == null || value.isBlank()) ? null : value.trim();
     }
 
     private PageResponse<OpeningListItemResponse> toPageResponse(Page<Opening> page) {
