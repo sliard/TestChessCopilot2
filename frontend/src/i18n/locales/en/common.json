@@ -1,0 +1,52 @@
+{
+  "app": {
+    "name": "Chess Training",
+    "tagline": "Master your openings"
+  },
+  "nav": {
+    "home": "Home",
+    "openings": "Openings",
+    "myOpenings": "My Openings",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Logout",
+    "dashboard": "Dashboard"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "clear": "Clear",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "reset": "Reset all"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} of {{total}}",
+    "showing": "Showing {{from}} to {{to}} of {{total}} results"
+  },
+  "language": {
+    "select": "Select language",
+    "en": "English",
+    "fr": "French"
+  },
+  "home": {
+    "title": "♟️ Chess Training",
+    "tagline": "Master your chess openings",
+    "description": "Explore our library of classic openings, study positions on an interactive board, and build your own personalized repertoire.",
+    "browseOpenings": "Browse Openings",
+    "welcomeBack": "Welcome back, {{name}}!",
+    "createAccount": "Create an account to save your favorites and build your own openings.",
+    "featureLibrary": "Opening Library",
+    "featureLibraryDesc": "Browse curated chess openings with interactive chessboards.",
+    "featureBoard": "Interactive Board",
+    "featureBoardDesc": "Navigate through moves step by step with keyboard shortcuts.",
+    "featureRepertoire": "Personal Repertoire",
+    "featureRepertoireDesc": "Create and manage your own openings collection."
+  }
+}

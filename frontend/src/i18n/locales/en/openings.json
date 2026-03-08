@@ -1,0 +1,65 @@
+{
+  "list": {
+    "title": "Chess Openings",
+    "subtitle": "Explore our library of classic chess openings",
+    "empty": "No openings found",
+    "adjustSearch": "Try adjusting your search criteria.",
+    "searchPlaceholder": "Search openings...",
+    "moves": "{{count}} moves"
+  },
+  "detail": {
+    "backToList": "← Back to openings",
+    "notFound": "Opening not found or failed to load.",
+    "description": "Description",
+    "details": "Details",
+    "ecoCode": "ECO Code",
+    "moves": "Moves",
+    "author": "Author",
+    "createdAt": "Created"
+  },
+  "myOpenings": {
+    "title": "My Openings",
+    "newOpening": "+ New Opening",
+    "searchPlaceholder": "Search my openings...",
+    "empty": "♟️ No openings yet",
+    "emptyHint": "Start building your opening repertoire!",
+    "createFirst": "+ Create my first opening"
+  },
+  "form": {
+    "createTitle": "Create New Opening",
+    "editTitle": "Edit Opening",
+    "name": "Name",
+    "namePlaceholder": "e.g., Sicilian Defense",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe this opening...",
+    "ecoCode": "ECO Code (optional)",
+    "ecoCodePlaceholder": "e.g., B20",
+    "moves": "Moves (algebraic notation)",
+    "movesPlaceholder": "1.e4 c5 2.Nf3 d6 3.d4 cxd4",
+    "movesValid": "{{count}} valid moves",
+    "movesInvalid": "Invalid move: {{move}}",
+    "visibility": "Visibility",
+    "private": "Private",
+    "public": "Public",
+    "preview": "Position Preview",
+    "create": "Create",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "backToMyOpenings": "← Back to my openings"
+  },
+  "cta": {
+    "register": "Create an account to save your favorite openings and create your own!",
+    "registerButton": "Sign Up Free",
+    "detailHint": "💡 Create an account to save your favorite openings and create your own!"
+  },
+  "delete": {
+    "title": "Delete Opening",
+    "confirm": "Are you sure you want to delete {{name}}? This action cannot be undone."
+  },
+  "search": {
+    "ecoCode": "ECO code",
+    "sortRecent": "Most recent",
+    "sortNameAsc": "Name A-Z",
+    "sortNameDesc": "Name Z-A"
+  }
+}

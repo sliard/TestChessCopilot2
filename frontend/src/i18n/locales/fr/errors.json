@@ -1,0 +1,19 @@
+{
+  "generic": "Une erreur est survenue. Veuillez réessayer.",
+  "network": "Erreur réseau. Vérifiez votre connexion.",
+  "unauthorized": "Veuillez vous connecter pour continuer.",
+  "forbidden": "Vous n'avez pas la permission d'accéder à cette ressource.",
+  "notFound": "La ressource demandée n'a pas été trouvée.",
+  "validation": "Veuillez vérifier les erreurs du formulaire.",
+  "server": "Erreur serveur. Veuillez réessayer plus tard.",
+  "failedToLoad": "Échec du chargement. Veuillez réessayer.",
+  "failedToCreate": "Échec de la création. Veuillez réessayer.",
+  "failedToUpdate": "Échec de la mise à jour. Veuillez réessayer.",
+  "pages": {
+    "notFound": {
+      "title": "Page non trouvée",
+      "message": "La page que vous recherchez n'existe pas.",
+      "backHome": "Retour à l'accueil"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "app": {
+    "name": "Chess Training",
+    "tagline": "Maîtrisez vos ouvertures"
+  },
+  "nav": {
+    "home": "Accueil",
+    "openings": "Ouvertures",
+    "myOpenings": "Mes Ouvertures",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "dashboard": "Tableau de bord"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "clear": "Effacer",
+    "submit": "Envoyer",
+    "loading": "Chargement...",
+    "reset": "Tout réinitialiser"
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} sur {{total}}",
+    "showing": "Affichage de {{from}} à {{to}} sur {{total}} résultats"
+  },
+  "language": {
+    "select": "Choisir la langue",
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "home": {
+    "title": "♟️ Chess Training",
+    "tagline": "Maîtrisez vos ouvertures d'échecs",
+    "description": "Explorez notre bibliothèque d'ouvertures classiques, étudiez les positions sur un échiquier interactif et construisez votre propre répertoire personnalisé.",
+    "browseOpenings": "Parcourir les ouvertures",
+    "welcomeBack": "Bienvenue, {{name}} !",
+    "createAccount": "Créez un compte pour sauvegarder vos favoris et construire vos propres ouvertures.",
+    "featureLibrary": "Bibliothèque d'ouvertures",
+    "featureLibraryDesc": "Parcourez des ouvertures d'échecs avec des échiquiers interactifs.",
+    "featureBoard": "Échiquier interactif",
+    "featureBoardDesc": "Naviguez dans les coups pas à pas avec les raccourcis clavier.",
+    "featureRepertoire": "Répertoire personnel",
+    "featureRepertoireDesc": "Créez et gérez votre propre collection d'ouvertures."
+  }
+}
