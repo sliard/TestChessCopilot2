@@ -34,7 +34,7 @@ public class UserOpeningServiceImpl implements UserOpeningService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Opening> openingsPage = openingRepository.findByUserId(userId, pageable);
 
-        return toPageResponse(openingsPage);
+        return OpeningMapper.toPageResponse(openingsPage);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UserOpeningServiceImpl implements UserOpeningService {
         Opening opening = openingRepository.findByIdAndUserId(openingId, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Opening", "id", openingId));
 
-        return PublicOpeningServiceImpl.toDetailResponse(opening);
+        return OpeningMapper.toDetailResponse(opening);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class UserOpeningServiceImpl implements UserOpeningService {
 
         Opening saved = openingRepository.save(opening);
 
-        return PublicOpeningServiceImpl.toDetailResponse(saved);
+        return OpeningMapper.toDetailResponse(saved);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class UserOpeningServiceImpl implements UserOpeningService {
 
         Opening saved = openingRepository.save(opening);
 
-        return PublicOpeningServiceImpl.toDetailResponse(saved);
+        return OpeningMapper.toDetailResponse(saved);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class UserOpeningServiceImpl implements UserOpeningService {
         opening.setIsPublic(!opening.getIsPublic());
         Opening saved = openingRepository.save(opening);
 
-        return PublicOpeningServiceImpl.toDetailResponse(saved);
+        return OpeningMapper.toDetailResponse(saved);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class UserOpeningServiceImpl implements UserOpeningService {
         Page<Opening> openingsPage = openingRepository.searchUserOpenings(
                 userId, query, ecoCode, moves, isPublic, pageable);
 
-        return toPageResponse(openingsPage);
+        return OpeningMapper.toPageResponse(openingsPage);
     }
 
     private Boolean resolveVisibility(String visibility) {
@@ -131,22 +131,13 @@ public class UserOpeningServiceImpl implements UserOpeningService {
     }
 
     private String resolveSortField(String sort) {
-        return switch (sort != null ? sort : "createdAt") {
+        if (sort == null) {
+            return "createdAt";
+        }
+        return switch (sort) {
             case "name" -> "name";
             case "ecoCode" -> "ecoCode";
             default -> "createdAt";
         };
-    }
-
-    private PageResponse<OpeningListItemResponse> toPageResponse(Page<Opening> page) {
-        return new PageResponse<>(
-                page.getContent().stream()
-                        .map(PublicOpeningServiceImpl::toListItemResponse)
-                        .toList(),
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements(),
-                page.getTotalPages()
-        );
     }
 }

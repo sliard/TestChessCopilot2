@@ -4,9 +4,7 @@ import com.chessot.dto.request.OpeningRequest;
 import com.chessot.dto.response.OpeningDetailResponse;
 import com.chessot.dto.response.OpeningListItemResponse;
 import com.chessot.dto.response.PageResponse;
-import com.chessot.entity.User;
-import com.chessot.exception.ResourceNotFoundException;
-import com.chessot.repository.UserRepository;
+import com.chessot.service.AuthService;
 import com.chessot.service.UserOpeningService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -38,7 +36,7 @@ import java.util.UUID;
 public class UserOpeningController {
 
     private final UserOpeningService userOpeningService;
-    private final UserRepository userRepository;
+    private final AuthService authService;
 
     @GetMapping
     @Operation(summary = "List user's openings",
@@ -153,9 +151,6 @@ public class UserOpeningController {
     }
 
     private UUID resolveUserId(UserDetails userDetails) {
-        User user = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "User", "email", userDetails.getUsername()));
-        return user.getId();
+        return authService.getUserIdByEmail(userDetails.getUsername());
     }
 }

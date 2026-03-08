@@ -6,6 +6,8 @@ import com.chessot.dto.request.RegisterRequest;
 import com.chessot.dto.response.AuthResponse;
 import com.chessot.dto.response.UserResponse;
 
+import java.util.UUID;
+
 public interface AuthService {
 
     AuthResponse register(RegisterRequest request);
@@ -15,4 +17,6 @@ public interface AuthService {
     AuthResponse refreshToken(RefreshTokenRequest request);
 
     UserResponse getCurrentUser(String email);
+
+    UUID getUserIdByEmail(String email);
 }
