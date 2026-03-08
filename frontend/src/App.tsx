@@ -8,6 +8,9 @@ import { DashboardPage } from '@/pages/DashboardPage';
 import { OpeningsListPage } from '@/pages/openings/OpeningsListPage';
 import { OpeningDetailPage } from '@/pages/openings/OpeningDetailPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { MyOpeningsPage } from '@/pages/MyOpeningsPage';
+import { CreateOpeningPage } from '@/pages/CreateOpeningPage';
+import { EditOpeningPage } from '@/pages/EditOpeningPage';
 
 export const App: React.FC = () => {
   return (
@@ -21,6 +24,9 @@ export const App: React.FC = () => {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/my-openings" element={<MyOpeningsPage />} />
+          <Route path="/openings/new" element={<CreateOpeningPage />} />
+          <Route path="/openings/:id/edit" element={<EditOpeningPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

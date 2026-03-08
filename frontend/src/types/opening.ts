@@ -26,3 +26,55 @@ export interface PageResponse<T> {
   totalElements: number;
   totalPages: number;
 }
+
+// --- Feature 004: User Opening CRUD Types ---
+
+export interface UserOpening {
+  id: string;
+  name: string;
+  description: string;
+  ecoCode?: string;
+  moves: string;
+  movesCount: number;
+  isPublic: boolean;
+  authorName: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserOpeningListItem {
+  id: string;
+  name: string;
+  description: string;
+  ecoCode?: string;
+  movesCount: number;
+  isPublic: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateOpeningRequest {
+  name: string;
+  description: string;
+  ecoCode?: string;
+  moves: string;
+  isPublic: boolean;
+}
+
+export interface UpdateOpeningRequest {
+  name: string;
+  description: string;
+  ecoCode?: string;
+  moves: string;
+  isPublic: boolean;
+}
+
+export interface UpdateVisibilityRequest {
+  isPublic: boolean;
+}
+
+export interface MovesValidationResult {
+  valid: boolean;
+  error?: string;
+  position?: string;
+}

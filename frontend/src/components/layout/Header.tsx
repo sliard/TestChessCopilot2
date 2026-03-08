@@ -41,6 +41,9 @@ export const Header: React.FC = () => {
           <div className={styles.authZone}>
             {isAuthenticated && user ? (
               <>
+                <Link to="/my-openings" className={styles.navLink} onClick={closeMenu}>
+                  {t('nav.myOpenings')}
+                </Link>
                 <Link to="/dashboard" className={styles.navLink} onClick={closeMenu}>
                   {t('nav.dashboard')}
                 </Link>

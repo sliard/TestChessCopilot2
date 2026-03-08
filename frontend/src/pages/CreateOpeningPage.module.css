@@ -1,0 +1,23 @@
+.page {
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.error {
+  text-align: center;
+  color: #dc2626;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}

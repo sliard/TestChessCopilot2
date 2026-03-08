@@ -1,0 +1,152 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input,
+.textarea,
+.inputSmall {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  color: #111827;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus,
+.textarea:focus,
+.inputSmall:focus {
+  outline: none;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+}
+
+.input::placeholder,
+.textarea::placeholder,
+.inputSmall::placeholder {
+  color: #9ca3af;
+}
+
+.input[aria-invalid='true'],
+.textarea[aria-invalid='true'] {
+  border-color: #dc2626;
+}
+
+.textarea {
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputSmall {
+  max-width: 8rem;
+}
+
+.error {
+  font-size: 0.8125rem;
+  color: #dc2626;
+}
+
+.movesSection {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.movesSection > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.preview {
+  flex-shrink: 0;
+  width: 240px;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input[type='checkbox'] {
+  width: 1.125rem;
+  height: 1.125rem;
+  accent-color: #1d4ed8;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 1.25rem;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cancelButton {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.cancelButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.submitButton {
+  background: #1d4ed8;
+  border: 1px solid #1d4ed8;
+  color: #ffffff;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .movesSection {
+    flex-direction: column;
+  }
+
+  .preview {
+    width: 100%;
+    max-width: 280px;
+  }
+}

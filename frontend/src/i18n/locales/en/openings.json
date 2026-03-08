@@ -30,5 +30,42 @@
   "cta": {
     "register": "Create an account to save your favorite openings and create your own!",
     "registerButton": "Sign Up Free"
+  },
+  "myOpenings": {
+    "title": "My Openings",
+    "create": "New opening",
+    "createFirst": "Create my first opening",
+    "empty": "No openings yet",
+    "emptyHint": "Start building your opening repertoire!",
+    "noResults": "No results for this search"
+  },
+  "visibility": {
+    "public": "Public",
+    "private": "Private"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "create": "Create",
+    "save": "Save",
+    "saving": "Saving...",
+    "confirmDelete": "Delete",
+    "back": "Back",
+    "loading": "Loading..."
+  },
+  "delete": {
+    "title": "Confirm deletion",
+    "message": "Are you sure you want to delete",
+    "warning": "This action cannot be undone."
+  },
+  "sort": {
+    "newest": "Newest first",
+    "oldest": "Oldest first",
+    "nameAsc": "Name A→Z",
+    "nameDesc": "Name Z→A"
+  },
+  "errors": {
+    "notFound": "Opening not found"
   }
 }
