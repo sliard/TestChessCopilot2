@@ -15,9 +15,10 @@ public record OpeningRequest(
 
         Boolean isPublic
 ) {
-    public OpeningRequest {
-        if (isPublic == null) {
-            isPublic = false;
-        }
+    /**
+     * Returns whether the opening is public, defaulting to false if not specified.
+     */
+    public boolean isPublicOrDefault() {
+        return isPublic != null && isPublic;
     }
 }
