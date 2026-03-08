@@ -33,6 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -94,11 +95,12 @@ class UserOpeningServiceImplTest {
         opening2.setMoves("1. e4 e5 2. Nf3 Nc6 3. Bb5");
 
         Page<Opening> page = new PageImpl<>(List.of(opening1, opening2), DEFAULT_PAGEABLE, 2);
-        when(openingRepository.findByUserId(eq(USER_ID), any(Pageable.class))).thenReturn(page);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class)))
+                .thenReturn(page);
 
         // Act
         PageResponse<UserOpeningListItemResponse> result =
-                userOpeningService.getUserOpenings(USER_ID, null, DEFAULT_PAGEABLE);
+                userOpeningService.getUserOpenings(USER_ID, null, null, null, null, DEFAULT_PAGEABLE);
 
         // Assert
         assertThat(result.content()).hasSize(2);
@@ -108,7 +110,7 @@ class UserOpeningServiceImplTest {
         assertThat(result.content().get(1).movesCount()).isEqualTo(5);
         assertThat(result.totalElements()).isEqualTo(2);
 
-        verify(openingRepository).findByUserId(eq(USER_ID), any(Pageable.class));
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class));
     }
 
     @Test
@@ -117,18 +119,18 @@ class UserOpeningServiceImplTest {
         // Arrange
         Opening opening = createSampleOpening(OPENING_ID, USER_ID);
         Page<Opening> page = new PageImpl<>(List.of(opening), DEFAULT_PAGEABLE, 1);
-        when(openingRepository.searchByUserIdAndName(eq(USER_ID), eq("Test"), any(Pageable.class)))
+        when(openingRepository.searchUserOpenings(eq(USER_ID), eq("Test"), isNull(), isNull(), isNull(), any(Pageable.class)))
                 .thenReturn(page);
 
         // Act
         PageResponse<UserOpeningListItemResponse> result =
-                userOpeningService.getUserOpenings(USER_ID, "Test", DEFAULT_PAGEABLE);
+                userOpeningService.getUserOpenings(USER_ID, "Test", null, null, null, DEFAULT_PAGEABLE);
 
         // Assert
         assertThat(result.content()).hasSize(1);
         assertThat(result.content().get(0).name()).isEqualTo("Test Opening");
 
-        verify(openingRepository).searchByUserIdAndName(eq(USER_ID), eq("Test"), any(Pageable.class));
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), eq("Test"), isNull(), isNull(), isNull(), any(Pageable.class));
     }
 
     @Test
@@ -136,15 +138,145 @@ class UserOpeningServiceImplTest {
     void should_returnEmptyPage_when_userHasNoOpenings() {
         // Arrange
         Page<Opening> emptyPage = new PageImpl<>(List.of(), DEFAULT_PAGEABLE, 0);
-        when(openingRepository.findByUserId(eq(USER_ID), any(Pageable.class))).thenReturn(emptyPage);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class)))
+                .thenReturn(emptyPage);
 
         // Act
         PageResponse<UserOpeningListItemResponse> result =
-                userOpeningService.getUserOpenings(USER_ID, null, DEFAULT_PAGEABLE);
+                userOpeningService.getUserOpenings(USER_ID, null, null, null, null, DEFAULT_PAGEABLE);
 
         // Assert
         assertThat(result.content()).isEmpty();
         assertThat(result.totalElements()).isZero();
+    }
+
+    @Test
+    @DisplayName("should_filterByEcoCode_when_ecoCodeProvided")
+    void should_filterByEcoCode_when_ecoCodeProvided() {
+        // Arrange
+        Opening opening = createSampleOpening(OPENING_ID, USER_ID);
+        opening.setEcoCode("B20");
+        Page<Opening> page = new PageImpl<>(List.of(opening), DEFAULT_PAGEABLE, 1);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), eq("B20"), isNull(), isNull(), any(Pageable.class)))
+                .thenReturn(page);
+
+        // Act
+        PageResponse<UserOpeningListItemResponse> result =
+                userOpeningService.getUserOpenings(USER_ID, null, "B20", null, null, DEFAULT_PAGEABLE);
+
+        // Assert
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).ecoCode()).isEqualTo("B20");
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), eq("B20"), isNull(), isNull(), any(Pageable.class));
+    }
+
+    @Test
+    @DisplayName("should_filterByMoves_when_movesProvided")
+    void should_filterByMoves_when_movesProvided() {
+        // Arrange
+        Opening opening = createSampleOpening(OPENING_ID, USER_ID);
+        Page<Opening> page = new PageImpl<>(List.of(opening), DEFAULT_PAGEABLE, 1);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), eq("1. e4 c5"), isNull(), any(Pageable.class)))
+                .thenReturn(page);
+
+        // Act
+        PageResponse<UserOpeningListItemResponse> result =
+                userOpeningService.getUserOpenings(USER_ID, null, null, "1. e4 c5", null, DEFAULT_PAGEABLE);
+
+        // Assert
+        assertThat(result.content()).hasSize(1);
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), isNull(), eq("1. e4 c5"), isNull(), any(Pageable.class));
+    }
+
+    @Test
+    @DisplayName("should_filterPublicOnly_when_visibilityIsPublic")
+    void should_filterPublicOnly_when_visibilityIsPublic() {
+        // Arrange
+        Opening opening = createSampleOpening(OPENING_ID, USER_ID);
+        opening.setIsPublic(true);
+        Page<Opening> page = new PageImpl<>(List.of(opening), DEFAULT_PAGEABLE, 1);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), eq(true), any(Pageable.class)))
+                .thenReturn(page);
+
+        // Act
+        PageResponse<UserOpeningListItemResponse> result =
+                userOpeningService.getUserOpenings(USER_ID, null, null, null, "public", DEFAULT_PAGEABLE);
+
+        // Assert
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).isPublic()).isTrue();
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), eq(true), any(Pageable.class));
+    }
+
+    @Test
+    @DisplayName("should_filterPrivateOnly_when_visibilityIsPrivate")
+    void should_filterPrivateOnly_when_visibilityIsPrivate() {
+        // Arrange
+        Opening opening = createSampleOpening(OPENING_ID, USER_ID);
+        opening.setIsPublic(false);
+        Page<Opening> page = new PageImpl<>(List.of(opening), DEFAULT_PAGEABLE, 1);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), eq(false), any(Pageable.class)))
+                .thenReturn(page);
+
+        // Act
+        PageResponse<UserOpeningListItemResponse> result =
+                userOpeningService.getUserOpenings(USER_ID, null, null, null, "private", DEFAULT_PAGEABLE);
+
+        // Assert
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).isPublic()).isFalse();
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), eq(false), any(Pageable.class));
+    }
+
+    @Test
+    @DisplayName("should_notFilterVisibility_when_visibilityIsAll")
+    void should_notFilterVisibility_when_visibilityIsAll() {
+        // Arrange
+        Page<Opening> page = new PageImpl<>(List.of(), DEFAULT_PAGEABLE, 0);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class)))
+                .thenReturn(page);
+
+        // Act
+        userOpeningService.getUserOpenings(USER_ID, null, null, null, "all", DEFAULT_PAGEABLE);
+
+        // Assert — "all" resolves to null isPublic, meaning no visibility filter
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class));
+    }
+
+    @Test
+    @DisplayName("should_combineAllFilters_when_allProvided")
+    void should_combineAllFilters_when_allProvided() {
+        // Arrange
+        Opening opening = createSampleOpening(OPENING_ID, USER_ID);
+        opening.setIsPublic(true);
+        Page<Opening> page = new PageImpl<>(List.of(opening), DEFAULT_PAGEABLE, 1);
+        when(openingRepository.searchUserOpenings(
+                eq(USER_ID), eq("Sicilian"), eq("B20"), eq("1. e4 c5"), eq(true), any(Pageable.class)))
+                .thenReturn(page);
+
+        // Act
+        PageResponse<UserOpeningListItemResponse> result =
+                userOpeningService.getUserOpenings(USER_ID, "Sicilian", "B20", "1. e4 c5", "public", DEFAULT_PAGEABLE);
+
+        // Assert
+        assertThat(result.content()).hasSize(1);
+        verify(openingRepository).searchUserOpenings(
+                eq(USER_ID), eq("Sicilian"), eq("B20"), eq("1. e4 c5"), eq(true), any(Pageable.class));
+    }
+
+    @Test
+    @DisplayName("should_normalizeEmptyStringsToNull")
+    void should_normalizeEmptyStringsToNull() {
+        // Arrange
+        Page<Opening> emptyPage = new PageImpl<>(List.of(), DEFAULT_PAGEABLE, 0);
+        when(openingRepository.searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class)))
+                .thenReturn(emptyPage);
+
+        // Act
+        userOpeningService.getUserOpenings(USER_ID, "", "  ", "   ", null, DEFAULT_PAGEABLE);
+
+        // Assert — blank/empty strings must be normalized to null
+        verify(openingRepository).searchUserOpenings(eq(USER_ID), isNull(), isNull(), isNull(), isNull(), any(Pageable.class));
     }
 
     // ─── createOpening ───────────────────────────────────────────────────

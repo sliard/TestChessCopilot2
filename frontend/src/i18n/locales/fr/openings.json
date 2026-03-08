@@ -59,9 +59,36 @@
     "message": "Êtes-vous sûr de vouloir supprimer",
     "warning": "Cette action est irréversible."
   },
+  "filter": {
+    "ecoCode": "Code ECO",
+    "ecoCodePlaceholder": "Code ECO (ex: B20)",
+    "clearEcoCode": "Effacer le code ECO",
+    "movesLabel": "Coups",
+    "movesPlaceholder": "Ex: 1.e4 c5",
+    "clearMoves": "Effacer les coups",
+    "sortBy": "Trier par",
+    "visibilityLabel": "Visibilité",
+    "visibility": {
+      "all": "Toutes",
+      "public": "Publiques",
+      "private": "Privées"
+    },
+    "advancedFilters": "Filtres avancés",
+    "reset": "Réinitialiser",
+    "results": "{{count}} résultat",
+    "results_other": "{{count}} résultats",
+    "removeBadge": "Retirer le filtre {{filter}}",
+    "badges": {
+      "search": "Recherche",
+      "eco": "ECO",
+      "moves": "Coups",
+      "visibility": "Visibilité"
+    }
+  },
   "sort": {
     "newest": "Plus récentes",
     "oldest": "Plus anciennes",
+    "recentlyUpdated": "Mis à jour récemment",
     "nameAsc": "Nom A→Z",
     "nameDesc": "Nom Z→A"
   },

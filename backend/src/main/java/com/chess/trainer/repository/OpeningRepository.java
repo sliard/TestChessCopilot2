@@ -24,4 +24,27 @@ public interface OpeningRepository extends JpaRepository<Opening, UUID> {
 
     @Query("SELECT o FROM Opening o WHERE o.userId = :userId AND LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))")
     Page<Opening> searchByUserIdAndName(@Param("userId") UUID userId, @Param("query") String query, Pageable pageable);
+
+    @Query("SELECT o FROM Opening o WHERE o.isPublic = true " +
+           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%')) " +
+           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%'))")
+    Page<Opening> searchPublicOpenings(
+        @Param("query") String query,
+        @Param("ecoCode") String ecoCode,
+        @Param("moves") String moves,
+        Pageable pageable);
+
+    @Query("SELECT o FROM Opening o WHERE o.userId = :userId " +
+           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%')) " +
+           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%')) " +
+           "AND (:isPublic IS NULL OR o.isPublic = :isPublic)")
+    Page<Opening> searchUserOpenings(
+        @Param("userId") UUID userId,
+        @Param("query") String query,
+        @Param("ecoCode") String ecoCode,
+        @Param("moves") String moves,
+        @Param("isPublic") Boolean isPublic,
+        Pageable pageable);
 }

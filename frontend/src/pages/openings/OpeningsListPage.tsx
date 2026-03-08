@@ -1,22 +1,18 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { usePublicOpenings } from '@/hooks/usePublicOpenings';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useOpeningSearch } from '@/hooks/useOpeningSearch';
 import { OpeningCard } from '@/components/openings/OpeningCard';
-import { SearchBar } from '@/components/openings/SearchBar';
+import { SearchFiltersBar } from '@/components/openings/SearchFiltersBar';
+import { SORT_OPTIONS } from '@/types/search';
 import styles from './OpeningsListPage.module.css';
 
 export const OpeningsListPage: React.FC = () => {
   const { t } = useTranslation();
-  const [page, setPage] = useState(0);
-  const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search, 300);
-  const { openings, loading, error } = usePublicOpenings(page, debouncedSearch);
-
-  const handleSearch = (value: string) => {
-    setSearch(value);
-    setPage(0);
-  };
+  const {
+    openings, loading, error, totalResults,
+    query, ecoCode, moves, sort, page,
+    setQuery, setEcoCode, setMoves, setSort, setPage,
+    resetFilters, hasActiveFilters,
+  } = useOpeningSearch({ mode: 'public' });
 
   return (
     <div className={styles.page}>
@@ -25,10 +21,20 @@ export const OpeningsListPage: React.FC = () => {
           <h1 className={styles.title}>{t('list.title', { ns: 'openings' })}</h1>
         </div>
 
-        <SearchBar
-          value={search}
-          onChange={handleSearch}
-          placeholder={t('list.searchPlaceholder', { ns: 'openings' })}
+        <SearchFiltersBar
+          query={query}
+          ecoCode={ecoCode}
+          moves={moves}
+          sort={sort}
+          sortOptions={SORT_OPTIONS}
+          totalResults={totalResults}
+          showVisibilityFilter={false}
+          hasActiveFilters={hasActiveFilters}
+          onQueryChange={setQuery}
+          onEcoCodeChange={setEcoCode}
+          onMovesChange={setMoves}
+          onSortChange={setSort}
+          onResetFilters={resetFilters}
         />
 
         {loading && <p className={styles.loading}>{t('actions.loading')}</p>}

@@ -1,31 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useMyOpenings } from '@/hooks/useMyOpenings';
+import { useOpeningSearch } from '@/hooks/useOpeningSearch';
 import { useDeleteOpening } from '@/hooks/useDeleteOpening';
-import { useDebounce } from '@/hooks/useDebounce';
 import { MyOpeningCard } from '@/components/openings/MyOpeningCard';
 import { DeleteConfirmModal } from '@/components/openings/DeleteConfirmModal';
-import { SearchBar } from '@/components/openings/SearchBar';
+import { SearchFiltersBar } from '@/components/openings/SearchFiltersBar';
+import { SORT_OPTIONS } from '@/types/search';
 import type { UserOpeningListItem } from '@/types/opening';
 import styles from './MyOpeningsPage.module.css';
 
 export const MyOpeningsPage: React.FC = () => {
   const { t } = useTranslation('openings');
   const navigate = useNavigate();
-  const [page, setPage] = useState(0);
-  const [search, setSearch] = useState('');
-  const [sort, setSort] = useState('createdAt');
-  const [order, setOrder] = useState('desc');
-  const debouncedSearch = useDebounce(search, 300);
-  const { openings, loading, error, refetch } = useMyOpenings(page, debouncedSearch, sort, order);
+  const {
+    openings, loading, error, totalResults,
+    query, ecoCode, moves, visibility, sort, page,
+    setQuery, setEcoCode, setMoves, setVisibility, setSort, setPage,
+    resetFilters, hasActiveFilters, refetch,
+  } = useOpeningSearch({ mode: 'personal' });
   const { deleteOpening, loading: deleteLoading } = useDeleteOpening();
   const [openingToDelete, setOpeningToDelete] = useState<UserOpeningListItem | null>(null);
-
-  const handleSearch = (value: string) => {
-    setSearch(value);
-    setPage(0);
-  };
 
   const handleEdit = (id: string) => {
     navigate(`/openings/${id}/edit`);
@@ -40,15 +35,6 @@ export const MyOpeningsPage: React.FC = () => {
     }
   };
 
-  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    if (value === 'name-asc') { setSort('name'); setOrder('asc'); }
-    else if (value === 'name-desc') { setSort('name'); setOrder('desc'); }
-    else if (value === 'createdAt-asc') { setSort('createdAt'); setOrder('asc'); }
-    else { setSort('createdAt'); setOrder('desc'); }
-    setPage(0);
-  };
-
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -59,19 +45,23 @@ export const MyOpeningsPage: React.FC = () => {
           </button>
         </div>
 
-        <div className={styles.toolbar}>
-          <SearchBar
-            value={search}
-            onChange={handleSearch}
-            placeholder={t('list.searchPlaceholder', 'Rechercher...')}
-          />
-          <select className={styles.sortSelect} onChange={handleSortChange} value={`${sort}-${order}`}>
-            <option value="createdAt-desc">{t('sort.newest', 'Plus récentes')}</option>
-            <option value="createdAt-asc">{t('sort.oldest', 'Plus anciennes')}</option>
-            <option value="name-asc">{t('sort.nameAsc', 'Nom A→Z')}</option>
-            <option value="name-desc">{t('sort.nameDesc', 'Nom Z→A')}</option>
-          </select>
-        </div>
+        <SearchFiltersBar
+          query={query}
+          ecoCode={ecoCode}
+          moves={moves}
+          visibility={visibility}
+          sort={sort}
+          sortOptions={SORT_OPTIONS}
+          totalResults={totalResults}
+          showVisibilityFilter={true}
+          hasActiveFilters={hasActiveFilters}
+          onQueryChange={setQuery}
+          onEcoCodeChange={setEcoCode}
+          onMovesChange={setMoves}
+          onVisibilityChange={setVisibility}
+          onSortChange={setSort}
+          onResetFilters={resetFilters}
+        />
 
         {loading && <p className={styles.loading}>{t('actions.loading', 'Chargement...')}</p>}
         {error && <p className={styles.error}>{error.message}</p>}
@@ -82,11 +72,11 @@ export const MyOpeningsPage: React.FC = () => {
               <div className={styles.empty}>
                 <span className={styles.emptyIcon}>♟️</span>
                 <p className={styles.emptyText}>
-                  {search
+                  {hasActiveFilters
                     ? t('myOpenings.noResults', 'Aucun résultat pour cette recherche')
                     : t('myOpenings.empty', 'Aucune ouverture pour l\'instant')}
                 </p>
-                {!search && (
+                {!hasActiveFilters && (
                   <>
                     <p className={styles.emptySubtext}>
                       {t('myOpenings.emptyHint', 'Commencez à construire votre répertoire d\'ouvertures !')}
@@ -115,7 +105,7 @@ export const MyOpeningsPage: React.FC = () => {
                 <button
                   className={styles.paginationButton}
                   disabled={page === 0}
-                  onClick={() => setPage((p) => p - 1)}
+                  onClick={() => setPage(page - 1)}
                 >
                   ◀ {t('pagination.previous', 'Précédent')}
                 </button>
@@ -125,7 +115,7 @@ export const MyOpeningsPage: React.FC = () => {
                 <button
                   className={styles.paginationButton}
                   disabled={page >= openings.totalPages - 1}
-                  onClick={() => setPage((p) => p + 1)}
+                  onClick={() => setPage(page + 1)}
                 >
                   {t('pagination.next', 'Suivant')} ▶
                 </button>

@@ -41,10 +41,14 @@ public class UserOpeningController {
             @Parameter(description = "Nombre d'éléments par page") @RequestParam(defaultValue = "20") int size,
             @Parameter(description = "Champ de tri") @RequestParam(defaultValue = "createdAt") String sort,
             @Parameter(description = "Ordre de tri") @RequestParam(defaultValue = "desc") String order,
-            @Parameter(description = "Recherche par nom") @RequestParam(required = false) String q) {
+            @Parameter(description = "Recherche par nom") @RequestParam(required = false) String q,
+            @Parameter(description = "Filtrer par préfixe de code ECO (ex: B20, C)") @RequestParam(required = false) String ecoCode,
+            @Parameter(description = "Filtrer par préfixe de coups (ex: 1.e4 e5)") @RequestParam(required = false) String moves,
+            @Parameter(description = "Filtrer par visibilité : all, public, private") @RequestParam(required = false) String visibility) {
         UUID userId = resolveUserId(userDetails);
         Sort.Direction direction = "asc".equalsIgnoreCase(order) ? Sort.Direction.ASC : Sort.Direction.DESC;
-        return userOpeningService.getUserOpenings(userId, q, PageRequest.of(page, size, Sort.by(direction, sort)));
+        return userOpeningService.getUserOpenings(userId, q, ecoCode, moves, visibility,
+                PageRequest.of(page, size, Sort.by(direction, sort)));
     }
 
     @PostMapping

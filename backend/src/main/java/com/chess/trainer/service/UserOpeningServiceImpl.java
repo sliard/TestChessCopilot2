@@ -29,14 +29,32 @@ public class UserOpeningServiceImpl implements UserOpeningService {
     private final UserRepository userRepository;
 
     @Override
-    public PageResponse<UserOpeningListItemResponse> getUserOpenings(UUID userId, String query, Pageable pageable) {
-        Page<Opening> openings;
-        if (query != null && !query.isBlank()) {
-            openings = openingRepository.searchByUserIdAndName(userId, query, pageable);
-        } else {
-            openings = openingRepository.findByUserId(userId, pageable);
-        }
+    public PageResponse<UserOpeningListItemResponse> getUserOpenings(
+            UUID userId, String query, String ecoCode, String moves,
+            String visibility, Pageable pageable) {
+        String normalizedQuery = normalizeParam(query);
+        String normalizedEcoCode = normalizeParam(ecoCode);
+        String normalizedMoves = normalizeParam(moves);
+        Boolean isPublic = resolveVisibility(visibility);
+
+        Page<Opening> openings = openingRepository.searchUserOpenings(
+                userId, normalizedQuery, normalizedEcoCode, normalizedMoves, isPublic, pageable);
         return toPageResponse(openings);
+    }
+
+    private String normalizeParam(String value) {
+        return (value != null && !value.isBlank()) ? value : null;
+    }
+
+    private Boolean resolveVisibility(String visibility) {
+        if (visibility == null) {
+            return null;
+        }
+        return switch (visibility.toLowerCase()) {
+            case "public" -> true;
+            case "private" -> false;
+            default -> null;
+        };
     }
 
     @Override

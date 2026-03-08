@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { publicOpeningService } from '@/services/publicOpeningService';
 import type { PageResponse, OpeningListItem } from '@/types/opening';
+import type { SearchFilters } from '@/types/search';
 
 interface UsePublicOpeningsReturn {
   openings: PageResponse<OpeningListItem> | null;
@@ -8,7 +9,7 @@ interface UsePublicOpeningsReturn {
   error: Error | null;
 }
 
-export const usePublicOpenings = (page: number, search: string): UsePublicOpeningsReturn => {
+export const usePublicOpenings = (params: Partial<SearchFilters>): UsePublicOpeningsReturn => {
   const [openings, setOpenings] = useState<PageResponse<OpeningListItem> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -18,7 +19,7 @@ export const usePublicOpenings = (page: number, search: string): UsePublicOpenin
       setLoading(true);
       setError(null);
       try {
-        const result = await publicOpeningService.getPublicOpenings(page, 20, search || undefined);
+        const result = await publicOpeningService.getPublicOpenings(params);
         setOpenings(result);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Failed to fetch openings'));
@@ -27,7 +28,7 @@ export const usePublicOpenings = (page: number, search: string): UsePublicOpenin
       }
     };
     fetchOpenings();
-  }, [page, search]);
+  }, [params.page, params.q, params.ecoCode, params.moves, params.sort, params.order]);
 
   return { openings, loading, error };
 };

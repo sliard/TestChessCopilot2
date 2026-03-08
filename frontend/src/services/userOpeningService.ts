@@ -14,6 +14,9 @@ interface GetMyOpeningsParams {
   sort?: string;
   order?: string;
   q?: string;
+  ecoCode?: string;
+  moves?: string;
+  visibility?: string;
 }
 
 export const userOpeningService = {
@@ -24,6 +27,9 @@ export const userOpeningService = {
     if (params?.sort) searchParams.set('sort', params.sort);
     if (params?.order) searchParams.set('order', params.order);
     if (params?.q) searchParams.set('q', params.q);
+    if (params?.ecoCode) searchParams.set('ecoCode', params.ecoCode);
+    if (params?.moves) searchParams.set('moves', params.moves);
+    if (params?.visibility && params.visibility !== 'all') searchParams.set('visibility', params.visibility);
     const query = searchParams.toString();
     return api<PageResponse<UserOpeningListItem>>(`/v1/openings${query ? `?${query}` : ''}`);
   },
