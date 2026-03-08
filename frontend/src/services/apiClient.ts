@@ -180,6 +180,14 @@ class ApiClient {
     });
   }
 
+  async patch<T>(endpoint: string, body?: unknown, authenticated = true): Promise<T> {
+    return this.request<T>(endpoint, {
+      method: 'PATCH',
+      body: body ? JSON.stringify(body) : undefined,
+      authenticated,
+    });
+  }
+
   async delete<T>(endpoint: string, authenticated = true): Promise<T> {
     return this.request<T>(endpoint, { method: 'DELETE', authenticated });
   }
