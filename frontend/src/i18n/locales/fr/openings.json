@@ -1,0 +1,65 @@
+{
+  "list": {
+    "title": "Ouvertures d'échecs",
+    "subtitle": "Explorez notre bibliothèque d'ouvertures classiques",
+    "empty": "Aucune ouverture trouvée",
+    "adjustSearch": "Essayez d'ajuster vos critères de recherche.",
+    "searchPlaceholder": "Rechercher une ouverture...",
+    "moves": "{{count}} coups"
+  },
+  "detail": {
+    "backToList": "← Retour aux ouvertures",
+    "notFound": "Ouverture non trouvée ou erreur de chargement.",
+    "description": "Description",
+    "details": "Détails",
+    "ecoCode": "Code ECO",
+    "moves": "Coups",
+    "author": "Auteur",
+    "createdAt": "Créé le"
+  },
+  "myOpenings": {
+    "title": "Mes Ouvertures",
+    "newOpening": "+ Nouvelle ouverture",
+    "searchPlaceholder": "Rechercher dans mes ouvertures...",
+    "empty": "♟️ Aucune ouverture pour l'instant",
+    "emptyHint": "Commencez à construire votre répertoire d'ouvertures !",
+    "createFirst": "+ Créer ma première ouverture"
+  },
+  "form": {
+    "createTitle": "Créer une nouvelle ouverture",
+    "editTitle": "Modifier l'ouverture",
+    "name": "Nom",
+    "namePlaceholder": "ex: Défense sicilienne",
+    "description": "Description",
+    "descriptionPlaceholder": "Décrivez cette ouverture...",
+    "ecoCode": "Code ECO (optionnel)",
+    "ecoCodePlaceholder": "ex: B20",
+    "moves": "Coups (notation algébrique)",
+    "movesPlaceholder": "1.e4 c5 2.Cf3 d6 3.d4 cxd4",
+    "movesValid": "{{count}} coups valides",
+    "movesInvalid": "Coup invalide : {{move}}",
+    "visibility": "Visibilité",
+    "private": "Privé",
+    "public": "Public",
+    "preview": "Prévisualisation de la position",
+    "create": "Créer",
+    "save": "Enregistrer les modifications",
+    "saving": "Enregistrement...",
+    "backToMyOpenings": "← Retour à mes ouvertures"
+  },
+  "cta": {
+    "register": "Créez un compte pour sauvegarder vos ouvertures favorites et créer les vôtres !",
+    "registerButton": "S'inscrire gratuitement",
+    "detailHint": "💡 Créez un compte pour sauvegarder vos ouvertures favorites et créer les vôtres !"
+  },
+  "delete": {
+    "title": "Supprimer l'ouverture",
+    "confirm": "Êtes-vous sûr de vouloir supprimer <strong>{{name}}</strong> ? Cette action est irréversible."
+  },
+  "search": {
+    "ecoCode": "Code ECO",
+    "sortRecent": "Plus récent",
+    "sortNameAsc": "Nom A-Z",
+    "sortNameDesc": "Nom Z-A"
+  }
+}
