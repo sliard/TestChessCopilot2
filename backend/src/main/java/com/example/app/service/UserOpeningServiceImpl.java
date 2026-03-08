@@ -96,9 +96,9 @@ public class UserOpeningServiceImpl implements UserOpeningService {
                 opening.getDescription(),
                 opening.getEcoCode(),
                 opening.getMoves(),
-                countMoves(opening.getMoves()),
+                OpeningUtils.countMoves(opening.getMoves()),
                 opening.getIsPublic(),
-                getAuthorName(opening),
+                OpeningUtils.getAuthorName(opening),
                 opening.getCreatedAt(),
                 opening.getUpdatedAt()
         );
@@ -110,22 +110,10 @@ public class UserOpeningServiceImpl implements UserOpeningService {
                 opening.getName(),
                 opening.getDescription(),
                 opening.getEcoCode(),
-                countMoves(opening.getMoves()),
+                OpeningUtils.countMoves(opening.getMoves()),
                 opening.getIsPublic(),
                 opening.getCreatedAt(),
                 opening.getUpdatedAt()
         );
-    }
-
-    private String getAuthorName(Opening opening) {
-        if (opening.getUser() == null) return "Système";
-        return opening.getUser().getFirstName() + " " + opening.getUser().getLastName();
-    }
-
-    private int countMoves(String moves) {
-        if (moves == null || moves.isBlank()) return 0;
-        return (int) java.util.Arrays.stream(moves.trim().split("\\s+"))
-                .filter(token -> !token.matches("\\d+\\.+"))
-                .count();
     }
 }

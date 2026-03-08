@@ -1,7 +1,7 @@
 -- V4 : Données d'exemple — ouvertures système
 INSERT INTO opening (id, name, description, eco_code, moves, is_public, user_id, created_at) VALUES
     (uuid_generate_v4(), 'Défense Sicilienne', 'Une des ouvertures les plus populaires au plus haut niveau. Les Noirs répondent 1...c5 à 1.e4, visant un jeu asymétrique et dynamique.', 'B20', '1.e4 c5', true, null, NOW()),
-    (uuid_generate_v4(), 'Ruy Lopez', 'Ouverture classique nommée d''après le prêtre espagnol Ruy López de Segura au 16e siècle. Vise à mettre la pression sur le centre noir.', 'C60', '1.e4 e5 2.Nf3 Nc6 3.Bb5', true, null, NOW()),
+    (uuid_generate_v4(), 'Ruy López', 'Ouverture classique nommée d''après le prêtre espagnol Ruy López de Segura au 16e siècle. Vise à mettre la pression sur le centre noir.', 'C60', '1.e4 e5 2.Nf3 Nc6 3.Bb5', true, null, NOW()),
     (uuid_generate_v4(), 'Gambit du Roi', 'Ouverture agressive sacrifiant un pion pour un développement rapide et une attaque directe sur le roi adverse.', 'C30', '1.e4 e5 2.f4', true, null, NOW()),
     (uuid_generate_v4(), 'Défense Française', 'Ouverture solide où les Noirs construisent une structure de pions robuste avec 1...e6, permettant un jeu positionnel complexe.', 'C00', '1.e4 e6', true, null, NOW()),
     (uuid_generate_v4(), 'Défense Caro-Kann', 'Ouverture fiable et solide. Les Noirs jouent 1...c6 pour préparer d5 avec un bon soutien de pions.', 'B10', '1.e4 c6', true, null, NOW()),
