@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.boardSection {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 480px;
+}
+
+.boardWrapper {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .boardSection {
+    max-width: 100%;
+  }
+}
