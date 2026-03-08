@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "openings": "Ouvertures",
+    "dashboard": "Tableau de bord",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "language": "Langue"
+  },
+  "landing": {
+    "hero": {
+      "title": "Maîtrisez les ouvertures d'échecs",
+      "subtitle": "Apprenez, pratiquez et mémorisez les ouvertures d'échecs les plus célèbres grâce à notre plateforme interactive.",
+      "cta": "Explorer les ouvertures"
+    },
+    "features": {
+      "title": "Pourquoi ChessOT ?",
+      "cards": {
+        "learn": {
+          "title": "Apprenez visuellement",
+          "description": "Explorez les ouvertures coup par coup sur un échiquier interactif."
+        },
+        "practice": {
+          "title": "Pratiquez à votre rythme",
+          "description": "Créez votre bibliothèque personnelle d'ouvertures et révisez-les quand vous voulez."
+        },
+        "discover": {
+          "title": "Découvrez de nouvelles stratégies",
+          "description": "Parcourez une collection d'ouvertures partagées par la communauté."
+        }
+      }
+    },
+    "preview": {
+      "title": "Ouvertures populaires"
+    },
+    "cta": {
+      "title": "Prêt à améliorer votre jeu ?",
+      "subtitle": "Rejoignez la communauté ChessOT et commencez à maîtriser les ouvertures dès aujourd'hui.",
+      "button": "Créer un compte",
+      "dashboard": "Accéder au tableau de bord"
+    }
+  },
+  "openings": {
+    "title": "Découvrez les Ouvertures d'Échecs",
+    "search": "Rechercher une ouverture...",
+    "noResults": "Aucune ouverture trouvée.",
+    "movesCount": "{{count}} coups",
+    "author": "Par {{name}}",
+    "system": "Système",
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "page": "Page {{current}} sur {{total}}"
+    },
+    "filters": {
+      "ecoCode": "Code ECO",
+      "ecoCodePlaceholder": "Ex: B20",
+      "sort": "Trier par",
+      "sortOptions": {
+        "createdAt": "Date de création",
+        "name": "Nom",
+        "ecoCode": "Code ECO"
+      },
+      "order": {
+        "asc": "Croissant",
+        "desc": "Décroissant"
+      },
+      "reset": "Réinitialiser",
+      "activeFilters": "Filtres actifs"
+    },
+    "detail": {
+      "back": "Retour aux ouvertures",
+      "description": "Description",
+      "moves": "Coups",
+      "ecoCode": "Code ECO",
+      "cta": "Créez un compte pour sauvegarder vos ouvertures préférées",
+      "ctaButton": "S'inscrire gratuitement"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "register": "S'inscrire"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "submit": "S'inscrire",
+      "hasAccount": "Déjà un compte ?",
+      "login": "Se connecter"
+    },
+    "errors": {
+      "invalidCredentials": "Identifiants invalides.",
+      "emailExists": "Cette adresse e-mail est déjà utilisée.",
+      "passwordMismatch": "Les mots de passe ne correspondent pas.",
+      "required": "Ce champ est requis.",
+      "invalidEmail": "Adresse e-mail invalide.",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères."
+    }
+  },
+  "dashboard": {
+    "title": "Mes Ouvertures",
+    "createNew": "Créer une ouverture",
+    "noOpenings": "Vous n'avez pas encore d'ouvertures. Créez votre première ouverture !",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette ouverture ?",
+    "public": "Publique",
+    "private": "Privée",
+    "toggleVisibility": "Changer la visibilité",
+    "form": {
+      "title": "Créer une ouverture",
+      "editTitle": "Modifier l'ouverture",
+      "name": "Nom de l'ouverture",
+      "namePlaceholder": "Ex: Défense Sicilienne",
+      "description": "Description",
+      "descriptionPlaceholder": "Décrivez cette ouverture...",
+      "ecoCode": "Code ECO",
+      "ecoCodePlaceholder": "Ex: B20",
+      "moves": "Coups (notation algébrique)",
+      "movesPlaceholder": "Ex: 1.e4 c5 2.Nf3 d6",
+      "movesHelp": "Entrez les coups en notation algébrique standard.",
+      "isPublic": "Rendre publique",
+      "preview": "Aperçu sur l'échiquier",
+      "submit": "Enregistrer",
+      "invalidMoves": "Les coups saisis ne sont pas valides."
+    }
+  },
+  "chessboard": {
+    "first": "Premier coup",
+    "previous": "Coup précédent",
+    "next": "Coup suivant",
+    "last": "Dernier coup",
+    "flipBoard": "Retourner l'échiquier",
+    "moveOf": "Coup {{current}} sur {{total}}"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue.",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "reset": "Réinitialiser",
+    "results": "{{count}} résultat(s)"
+  },
+  "footer": {
+    "copyright": "© 2026 ChessOT — Entraîneur d'ouvertures d'échecs"
+  }
+}
