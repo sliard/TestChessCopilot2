@@ -1,20 +1,10 @@
-// TODO: Feature 002 — Replace with real auth context
-interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-}
+import { useContext } from 'react';
+import { AuthContext } from '@/store/authContext';
 
-interface UseAuthResult {
-  isAuthenticated: boolean;
-  user: User | null;
-  logout: () => void;
-}
-
-export const useAuth = (): UseAuthResult => {
-  return {
-    isAuthenticated: false,
-    user: null,
-    logout: () => {},
-  };
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };
