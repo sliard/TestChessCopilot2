@@ -32,7 +32,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       {value && (
         <button
           className="search-bar__clear"
-          onClick={() => { setValue(''); onSearch(''); }}
+          onClick={() => setValue('')}
           aria-label="Clear search"
         >
           ✕

@@ -54,7 +54,7 @@
   },
   "delete": {
     "title": "Delete Opening",
-    "confirm": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone."
+    "confirm": "Are you sure you want to delete {{name}}? This action cannot be undone."
   },
   "search": {
     "ecoCode": "ECO code",

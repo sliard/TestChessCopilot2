@@ -36,9 +36,9 @@ public class PublicOpeningServiceImpl implements PublicOpeningService {
     @Override
     public PageResponse<OpeningListItemResponse> searchPublicOpenings(String query, String ecoCode, String moves, Pageable pageable) {
         var page = openingRepository.searchPublicOpenings(
-                query != null && query.isBlank() ? null : query,
-                ecoCode != null && ecoCode.isBlank() ? null : ecoCode,
-                moves != null && moves.isBlank() ? null : moves,
+                OpeningUtils.escapeLikeWildcards(OpeningUtils.nullIfBlank(query)),
+                OpeningUtils.escapeLikeWildcards(OpeningUtils.nullIfBlank(ecoCode)),
+                OpeningUtils.escapeLikeWildcards(OpeningUtils.nullIfBlank(moves)),
                 pageable);
         return PageResponse.from(page.map(this::toListItemResponse));
     }

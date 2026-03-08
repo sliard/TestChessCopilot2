@@ -54,7 +54,7 @@
   },
   "delete": {
     "title": "Supprimer l'ouverture",
-    "confirm": "Êtes-vous sûr de vouloir supprimer <strong>{{name}}</strong> ? Cette action est irréversible."
+    "confirm": "Êtes-vous sûr de vouloir supprimer {{name}} ? Cette action est irréversible."
   },
   "search": {
     "ecoCode": "Code ECO",

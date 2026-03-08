@@ -23,8 +23,9 @@ public class UserOpeningServiceImpl implements UserOpeningService {
 
     @Override
     public PageResponse<UserOpeningListItemResponse> getUserOpenings(UUID userId, String query, Pageable pageable) {
-        var page = (query != null && !query.isBlank())
-                ? openingRepository.searchByUserIdAndName(userId, query, pageable)
+        String sanitizedQuery = OpeningUtils.escapeLikeWildcards(OpeningUtils.nullIfBlank(query));
+        var page = (sanitizedQuery != null)
+                ? openingRepository.searchByUserIdAndName(userId, sanitizedQuery, pageable)
                 : openingRepository.findByUserId(userId, pageable);
         return PageResponse.from(page.map(this::toListItemResponse));
     }

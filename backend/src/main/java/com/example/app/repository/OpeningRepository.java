@@ -25,9 +25,9 @@ public interface OpeningRepository extends JpaRepository<Opening, UUID> {
     // Public search
     @EntityGraph(attributePaths = {"user"})
     @Query("SELECT o FROM Opening o WHERE o.isPublic = true " +
-           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))) " +
-           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%')) " +
-           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%'))")
+           "AND (:query IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%')) ESCAPE '\\') " +
+           "AND (:ecoCode IS NULL OR o.ecoCode LIKE CONCAT(:ecoCode, '%') ESCAPE '\\') " +
+           "AND (:moves IS NULL OR o.moves LIKE CONCAT(:moves, '%') ESCAPE '\\')")
     Page<Opening> searchPublicOpenings(
         @Param("query") String query,
         @Param("ecoCode") String ecoCode,
@@ -43,6 +43,6 @@ public interface OpeningRepository extends JpaRepository<Opening, UUID> {
     Optional<Opening> findByIdAndUserId(UUID id, UUID userId);
 
     @EntityGraph(attributePaths = {"user"})
-    @Query("SELECT o FROM Opening o WHERE o.user.id = :userId AND LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%'))")
+    @Query("SELECT o FROM Opening o WHERE o.user.id = :userId AND LOWER(o.name) LIKE LOWER(CONCAT('%', :query, '%')) ESCAPE '\\'")
     Page<Opening> searchByUserIdAndName(@Param("userId") UUID userId, @Param("query") String query, Pageable pageable);
 }

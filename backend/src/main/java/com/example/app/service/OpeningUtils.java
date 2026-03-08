@@ -32,4 +32,21 @@ public final class OpeningUtils {
                 .filter(token -> !token.matches("\\d+\\.+"))
                 .count();
     }
+
+    /**
+     * Returns null if the string is null or blank, otherwise returns the trimmed string.
+     */
+    public static String nullIfBlank(String s) {
+        return (s == null || s.isBlank()) ? null : s.trim();
+    }
+
+    /**
+     * Escapes SQL LIKE wildcard characters (% and _) in user input.
+     */
+    public static String escapeLikeWildcards(String input) {
+        if (input == null) return null;
+        return input.replace("\\", "\\\\")
+                     .replace("%", "\\%")
+                     .replace("_", "\\_");
+    }
 }
