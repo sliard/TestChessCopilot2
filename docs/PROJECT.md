@@ -95,14 +95,15 @@ Le domaine des échecs est riche en terminologie et concepts. Ce projet se conce
 
 | # | Feature | Description | Priorité | Spec |
 |---|---------|-------------|----------|------|
-| 1 | Authentification utilisateur | Inscription, connexion, gestion de compte | 🔴 Haute | [001-user-authentication.md](./docs/features/001-user-authentication.md) |
-| 2 | Navigation publique des ouvertures | Consultation des ouvertures publiques sans compte | 🔴 Haute | [002-public-openings-browsing.md](./docs/features/002-public-openings-browsing.md) |
-| 3 | Gestion des ouvertures | CRUD des ouvertures (privées/publiques) pour utilisateurs connectés | 🔴 Haute | [003-opening-management.md](./docs/features/003-opening-management.md) |
-| 4 | Échiquier interactif | Visualisation et navigation dans les coups d'une ouverture | 🔴 Haute | [004-interactive-chessboard.md](./docs/features/004-interactive-chessboard.md) |
-| 5 | Recherche et filtrage | Recherche d'ouvertures par nom, code ECO, coups | 🟡 Moyenne | [005-search-filtering.md](./docs/features/005-search-filtering.md) |
-| 6 | Collections personnelles | Organisation des ouvertures en répertoires | 🟡 Moyenne | - |
-| 7 | Système de notation | Ajout de notes et commentaires sur les positions | 🟡 Moyenne | - |
-| 8 | Mode entraînement | Entraînement avec répétition espacée | 🟢 Basse | - |
+| 1 | Landing, Layout & i18n | Page d'accueil, layout partagé (header/footer), internationalisation FR/EN | 🔴 Haute | [001-landing-layout-i18n.md](./docs/features/001-landing-layout-i18n.md) |
+| 2 | Authentification utilisateur | Inscription, connexion, gestion de compte | 🔴 Haute | [002-user-authentication.md](./docs/features/002-user-authentication.md) |
+| 3 | Navigation publique des ouvertures | Consultation des ouvertures publiques sans compte | 🔴 Haute | [003-public-openings-browsing.md](./docs/features/003-public-openings-browsing.md) |
+| 4 | Gestion des ouvertures | CRUD des ouvertures (privées/publiques) pour utilisateurs connectés | 🔴 Haute | [004-opening-management.md](./docs/features/004-opening-management.md) |
+| 5 | Échiquier interactif | Visualisation et navigation dans les coups d'une ouverture | 🔴 Haute | [005-interactive-chessboard.md](./docs/features/005-interactive-chessboard.md) |
+| 6 | Recherche et filtrage | Recherche d'ouvertures par nom, code ECO, coups | 🟡 Moyenne | [006-search-filtering.md](./docs/features/006-search-filtering.md) |
+| 7 | Collections personnelles | Organisation des ouvertures en répertoires | 🟡 Moyenne | - |
+| 8 | Système de notation | Ajout de notes et commentaires sur les positions | 🟡 Moyenne | - |
+| 9 | Mode entraînement | Entraînement avec répétition espacée | 🟢 Basse | - |
 
 ### Priorisation
 
@@ -117,11 +118,13 @@ Le domaine des échecs est riche en terminologie et concepts. Ce projet se conce
 ### Périmètre du MVP
 
 Le MVP se concentre sur les fonctionnalités essentielles permettant :
-1. La découverte publique des ouvertures
-2. La création de compte et gestion d'identité
-3. La création et gestion d'ouvertures privées/publiques
-4. La visualisation interactive sur échiquier
+1. Une page d'accueil, un layout partagé et l'internationalisation (FR/EN)
+2. La découverte publique des ouvertures
+3. La création de compte et gestion d'identité
+4. La création et gestion d'ouvertures privées/publiques
+5. La visualisation interactive sur échiquier
 
+- [x] Landing page, layout partagé (header/footer) et i18n (FR/EN)
 - [x] Authentification utilisateur (inscription, connexion, profil)
 - [x] Navigation publique des ouvertures (lecture seule pour visiteurs)
 - [x] Gestion CRUD des ouvertures avec visibilité publique/privée

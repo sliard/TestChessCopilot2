@@ -1,27 +1,27 @@
-# Feature 003 : Gestion des Ouvertures — CRUD Authentifié
+# Feature 004 : Gestion des Ouvertures — CRUD Authentifié
 
 > 📝 **Statut** : Ready
 >
 > 📅 **Date de création** : 2026-02-15
 >
-> 📅 **Dernière mise à jour** : 2026-03-07
+> 📅 **Dernière mise à jour** : 2026-03-08
 >
 > 👤 **Auteur** : Équipe Chess Training
 >
-> 🔗 **Dépendances** : [Feature 001 — Authentification](001-user-authentication.md), [Feature 002 — Consultation publique](002-public-openings-browsing.md)
+> 🔗 **Dépendances** : [Feature 002 — Authentification](002-user-authentication.md), [Feature 003 — Consultation publique](003-public-openings-browsing.md)
 
 ## 📋 Résumé
 
-Permettre aux utilisateurs authentifiés de **créer, modifier, supprimer et gérer** leurs propres ouvertures d'échecs. Chaque ouverture peut être **publique** (visible par tous via Feature 002) ou **privée** (visible uniquement par son propriétaire). Les coups saisis sont validés côté client via `chess.js` pour garantir leur légalité.
+Permettre aux utilisateurs authentifiés de **créer, modifier, supprimer et gérer** leurs propres ouvertures d'échecs. Chaque ouverture peut être **publique** (visible par tous via Feature 003) ou **privée** (visible uniquement par son propriétaire). Les coups saisis sont validés côté client via `chess.js` pour garantir leur légalité.
 
-> **Périmètre** : Cette feature couvre uniquement les opérations CRUD authentifiées. La consultation publique en lecture seule est traitée dans [Feature 002](002-public-openings-browsing.md).
+> **Périmètre** : Cette feature couvre uniquement les opérations CRUD authentifiées. La consultation publique en lecture seule est traitée dans [Feature 003](003-public-openings-browsing.md).
 
 ## ✅ Statut d'implémentation
 
 | Composant | Statut |
 |-----------|--------|
-| Entité `Opening` + migration DB | ✅ Implémenté (Feature 002) |
-| `OpeningRepository` (méthodes publiques) | ✅ Implémenté (Feature 002) |
+| Entité `Opening` + migration DB | ✅ Implémenté (Feature 003) |
+| `OpeningRepository` (méthodes publiques) | ✅ Implémenté (Feature 003) |
 | `OpeningRepository` (méthodes utilisateur) | ⏳ À implémenter |
 | `UserOpeningService` / `UserOpeningServiceImpl` | ⏳ À implémenter |
 | `UserOpeningController` (6 endpoints) | ⏳ À implémenter |
@@ -141,7 +141,7 @@ Permettre aux utilisateurs authentifiés de **créer, modifier, supprimer et gé
 
 #### Entité existante
 
-L'entité `Opening` est déjà définie (Feature 002). Aucune modification de schéma nécessaire.
+L'entité `Opening` est déjà définie (Feature 003). Aucune modification de schéma nécessaire.
 
 ```
 Opening
@@ -276,7 +276,7 @@ Format de réponse erreur (existant) :
   "message": "Ouverture non trouvée",
   "status": 404,
   "path": "/api/v1/openings/550e8400-e29b-41d4-a716-446655440000",
-  "timestamp": "2026-03-07T10:30:00Z",
+  "timestamp": "2026-03-08T10:30:00Z",
   "errors": null
 }
 ```
@@ -771,8 +771,8 @@ export const validateMoves = (movesString: string): MovesValidationResult => {
     "movesCount": 8,
     "isPublic": false,
     "authorName": "Jean Dupont",
-    "createdAt": "2026-03-07T10:30:00Z",
-    "updatedAt": "2026-03-07T10:30:00Z"
+    "createdAt": "2026-03-08T10:30:00Z",
+    "updatedAt": "2026-03-08T10:30:00Z"
   },
   "listResponse_200": {
     "content": [
@@ -783,8 +783,8 @@ export const validateMoves = (movesString: string): MovesValidationResult => {
         "ecoCode": "B35",
         "movesCount": 8,
         "isPublic": false,
-        "createdAt": "2026-03-07T10:30:00Z",
-        "updatedAt": "2026-03-07T10:30:00Z"
+        "createdAt": "2026-03-08T10:30:00Z",
+        "updatedAt": "2026-03-08T10:30:00Z"
       }
     ],
     "page": 0,
@@ -799,7 +799,7 @@ export const validateMoves = (movesString: string): MovesValidationResult => {
     "message": "Ouverture non trouvée",
     "status": 404,
     "path": "/api/v1/openings/550e8400-e29b-41d4-a716-446655440000",
-    "timestamp": "2026-03-07T10:35:00Z",
+    "timestamp": "2026-03-08T10:35:00Z",
     "errors": null
   },
   "error_400_validation": {
@@ -807,7 +807,7 @@ export const validateMoves = (movesString: string): MovesValidationResult => {
     "message": "Erreur de validation",
     "status": 400,
     "path": "/api/v1/openings",
-    "timestamp": "2026-03-07T10:35:00Z",
+    "timestamp": "2026-03-08T10:35:00Z",
     "errors": [
       "name : ne doit pas être vide",
       "moves : ne doit pas être vide"
@@ -822,7 +822,7 @@ export const validateMoves = (movesString: string): MovesValidationResult => {
 
 | Risque / Dépendance | Impact | Mitigation |
 |---------------------|--------|------------|
-| **Dépendance Feature 001** (Auth JWT) | Élevé | Feature 001 doit être complète et testée avant |
+| **Dépendance Feature 002** (Auth JWT) | Élevé | Feature 002 doit être complète et testée avant |
 | **Sécurité : accès aux ouvertures d'autrui** | Élevé | `findByIdAndUserId()` dans toutes les opérations, retour 404 (pas 403) |
 | **Validation coups côté client uniquement** | Moyen | `chess.js` côté frontend ; envisager validation serveur en V2 |
 | **Performance avec nombreuses ouvertures** | Moyen | Pagination + index `idx_opening_user_id` existant |

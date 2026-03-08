@@ -1,37 +1,32 @@
-# Feature : Navigation Publique des Ouvertures
+# Feature 003 : Navigation Publique des Ouvertures
 
 > 📝 **Statut** : Implemented
 > 
 > 📅 **Date de création** : 2026-02-15
 > 
+> 📅 **Dernière mise à jour** : 2026-03-08
+> 
 > 👤 **Auteur** : Équipe Chess Training
+> 
+> 🔗 **Dépendances** : [Feature 001 — Landing, Layout & i18n](001-landing-layout-i18n.md)
 
 ## 📋 Résumé
 
-Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvertures publiques en mode lecture seule, via les routes `/openings` et `/openings/:id`. La route `/` joue le rôle de landing page mixte et informative (connecté ou non connecté) pour présenter le service et orienter vers la navigation publique. Cette feature constitue le point d'entrée principal de l'application et doit inciter les visiteurs à s'inscrire pour débloquer les fonctionnalités avancées.
+Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvertures publiques en mode lecture seule, via les routes `/openings` et `/openings/:id`. Cette feature s'appuie sur le layout partagé et l'i18n fournis par la Feature 001, et incite les visiteurs à s'inscrire pour débloquer les fonctionnalités avancées.
+
+> **Note** : La landing page (`/`) et le layout partagé (header/footer) sont traités dans la [Feature 001](001-landing-layout-i18n.md).
 
 ## 🎯 Objectifs
 
-- [x] Proposer une landing page `/` informative et accessible à tous (connecté ou non connecté)
 - [x] Afficher une liste des ouvertures publiques accessibles à tous sur `/openings`
 - [x] Permettre la consultation détaillée d'une ouverture avec échiquier interactif
 - [x] Encourager l'inscription sans bloquer l'accès au contenu public
 - [x] Offrir une expérience fluide et engageante pour les visiteurs
+- [ ] Insérer 3 ouvertures publiques d'exemple en base de données (seed data via migration Flyway)
 
 ## 👥 User Stories
 
-### US1 : Landing publique informative
-**En tant que** visiteur (anonyme ou connecté),  
-**je veux** voir une page d'accueil qui présente clairement la valeur du service,  
-**afin de** comprendre rapidement ce que propose l'application et où commencer.
-
-**Critères d'acceptation :**
-- [x] La route `/` affiche une présentation concise du service (positionnement, valeur, usage)
-- [x] Le contenu principal reste informatif pour tous, sans dépendre de l'authentification
-- [x] Des call-to-action non bloquants orientent vers `/openings` et vers l'inscription/connexion
-- [x] La navigation vers `/openings` est visible et accessible immédiatement
-
-### US2 : Liste des ouvertures publiques
+### US1 : Liste des ouvertures publiques
 **En tant que** visiteur anonyme,  
 **je veux** voir la liste des ouvertures publiques disponibles,  
 **afin de** découvrir les ouvertures classiques et décider lesquelles m'intéressent.
@@ -43,7 +38,7 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 - [x] La pagination fonctionne (20 ouvertures par page)
 - [x] Temps de chargement < 500ms
 
-### US3 : Consultation d'une ouverture
+### US2 : Consultation d'une ouverture
 **En tant que** visiteur anonyme,  
 **je veux** consulter le détail d'une ouverture publique avec visualisation sur échiquier,  
 **afin de** comprendre les coups et la logique de l'ouverture.
@@ -56,7 +51,7 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 - [x] Notation algébrique visible pour chaque coup
 - [x] Responsive (desktop et mobile)
 
-### US4 : Incitation à l'inscription
+### US3 : Incitation à l'inscription
 **En tant que** visiteur anonyme,  
 **je veux** être informé des fonctionnalités disponibles avec un compte,  
 **afin de** comprendre l'intérêt de m'inscrire.
@@ -67,7 +62,7 @@ Permettre aux visiteurs non authentifiés de consulter la bibliothèque d'ouvert
 - [x] Lien vers la page d'inscription
 - [x] Non intrusif (peut être fermé)
 
-### US5 : Recherche basique
+### US4 : Recherche basique
 **En tant que** visiteur anonyme,  
 **je veux** rechercher une ouverture par son nom,  
 **afin de** trouver rapidement ce qui m'intéresse.
@@ -141,12 +136,23 @@ PageResponse<T>(
 - `PublicOpeningService` : Logique de récupération des ouvertures publiques
 - `OpeningRepository` : Repository JPA avec méthode `findByIsPublicTrue(Pageable)`
 
-### Frontend
+#### Migration Flyway — Seed Data
 
-#### Landing `/`
-- `HomePage` : page d'accueil informative pour présenter le service
-- Contenu principal accessible à tous (connecté/non connecté)
-- CTA non bloquants vers `OpeningsListPage`, `LoginPage` et `RegisterPage`
+Une migration Flyway insère 3 ouvertures publiques système (sans `user_id`) servant de données d'exemple pour que l'application ne soit pas vide au premier lancement.
+
+```sql
+-- V3__insert_sample_openings.sql
+
+INSERT INTO opening (id, name, description, eco_code, moves, is_public, user_id, created_at, updated_at)
+VALUES
+  (gen_random_uuid(), 'Défense Sicilienne', 'Une des ouvertures les plus populaires au plus haut niveau. Les Noirs répondent 1...c5 pour contester le centre sans créer de symétrie.', 'B20', '1.e4 c5', true, NULL, NOW(), NOW()),
+  (gen_random_uuid(), 'Ruy Lopez', 'Ouverture classique nommée d''après un prêtre espagnol du 16e siècle. Elle met la pression sur le cavalier c6 qui défend le pion e5.', 'C60', '1.e4 e5 2.Nf3 Nc6 3.Bb5', true, NULL, NOW(), NOW()),
+  (gen_random_uuid(), 'Gambit du Roi', 'Ouverture agressive où les Blancs sacrifient le pion f pour ouvrir la colonne f et accélérer le développement.', 'C30', '1.e4 e5 2.f4', true, NULL, NOW(), NOW());
+```
+
+> **Convention** : Ces ouvertures sont des données système (`user_id = NULL`). Elles sont publiques et non modifiables par les utilisateurs. Le numéro de version de la migration doit suivre la dernière migration existante.
+
+### Frontend
 
 #### Composants
 - `OpeningList` : Liste paginée avec cards d'ouvertures
@@ -163,7 +169,6 @@ PageResponse<T>(
 #### Routes
 | Route | Composant | Description |
 |-------|-----------|-------------|
-| `/` | HomePage | Landing mixte informative: présente le service et oriente vers la navigation publique |
 | `/openings` | OpeningsListPage | Liste paginée des ouvertures publiques |
 | `/openings/:id` | OpeningDetailPage | Détail d'une ouverture publique |
 
@@ -301,25 +306,25 @@ interface PageResponse<T> {
 | Librairie chess.js nécessaire | Élevé | Dépendance npm bien maintenue |
 | Performance avec nombreuses ouvertures | Moyen | Pagination + indexation DB |
 | Affichage mobile de l'échiquier | Moyen | Tests responsive approfondis |
-| Dépendance à Feature 004 (échiquier) | Élevé | Développer Feature 004 en parallèle |
+| Dépendance à Feature 005 (échiquier) | Élevé | Développer Feature 005 en parallèle |
 
 ## 📝 Notes
 
-- 2026-03-08 : Clarification documentaire de la feature pour distinguer explicitement la landing `/` (informative pour tous) de la navigation publique `/openings`, sans changement de périmètre produit.
-- Le composant échiquier sera réutilisé dans d'autres features (003, 004)
+- 2026-03-08 : Extraction de la landing page (`/`) vers la [Feature 001](001-landing-layout-i18n.md). Cette feature ne couvre plus que `/openings` et `/openings/:id`.
+- Le composant échiquier sera réutilisé dans d'autres features (004, 005)
 - Prévoir l'ajout de filtres avancés dans une prochaine version (niveau, popularité)
 - Considérer un système de tags/catégories pour mieux organiser les ouvertures
 - Mesurer le taux de conversion visiteur → inscrit pour optimiser le CTA
 
 ## ✅ Definition of Done
 
-- [x] Route `/` disponible comme landing informative et accessible à tous
 - [x] Endpoint `/api/v1/public/openings` retourne les ouvertures publiques paginées
 - [x] Endpoint `/api/v1/public/openings/{id}` retourne le détail d'une ouverture
+- [ ] Migration Flyway de seed data : 3 ouvertures publiques d'exemple insérées en base
 - [x] Tests unitaires du service (>80% couverture)
 - [x] Tests d'intégration des endpoints
 - [x] Page liste des ouvertures responsive et fonctionnelle
-- [x] Page détail avec échiquier de base (peut être simplifié si Feature 004 en cours)
+- [x] Page détail avec échiquier de base (peut être simplifié si Feature 005 en cours)
 - [x] Recherche fonctionnelle avec debounce
 - [x] CTA d'inscription visible et non intrusif
 - [ ] Tests E2E du parcours de navigation
