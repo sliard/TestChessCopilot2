@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Home",
+    "openings": "Openings",
+    "dashboard": "Dashboard",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "language": "Language"
+  },
+  "landing": {
+    "hero": {
+      "title": "Master Chess Openings",
+      "subtitle": "Learn, practice, and memorize the most famous chess openings with our interactive platform.",
+      "cta": "Explore openings"
+    },
+    "features": {
+      "title": "Why ChessOT?",
+      "cards": {
+        "learn": {
+          "title": "Learn visually",
+          "description": "Explore openings move by move on an interactive chessboard."
+        },
+        "practice": {
+          "title": "Practice at your pace",
+          "description": "Build your personal opening library and review them whenever you want."
+        },
+        "discover": {
+          "title": "Discover new strategies",
+          "description": "Browse a collection of openings shared by the community."
+        }
+      }
+    },
+    "preview": {
+      "title": "Popular openings"
+    },
+    "cta": {
+      "title": "Ready to improve your game?",
+      "subtitle": "Join the ChessOT community and start mastering openings today.",
+      "button": "Create an account",
+      "dashboard": "Go to dashboard"
+    }
+  },
+  "openings": {
+    "title": "Discover Chess Openings",
+    "search": "Search for an opening...",
+    "noResults": "No openings found.",
+    "movesCount": "{{count}} moves",
+    "author": "By {{name}}",
+    "system": "System",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {{current}} of {{total}}"
+    },
+    "filters": {
+      "ecoCode": "ECO Code",
+      "ecoCodePlaceholder": "E.g. B20",
+      "sort": "Sort by",
+      "sortOptions": {
+        "createdAt": "Date created",
+        "name": "Name",
+        "ecoCode": "ECO Code"
+      },
+      "order": {
+        "asc": "Ascending",
+        "desc": "Descending"
+      },
+      "reset": "Reset",
+      "activeFilters": "Active filters"
+    },
+    "detail": {
+      "back": "Back to openings",
+      "description": "Description",
+      "moves": "Moves",
+      "ecoCode": "ECO Code",
+      "cta": "Create an account to save your favorite openings",
+      "ctaButton": "Sign up for free"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Log in",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Log in",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up"
+    },
+    "register": {
+      "title": "Create an account",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "submit": "Sign up",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid credentials.",
+      "emailExists": "This email address is already in use.",
+      "passwordMismatch": "Passwords do not match.",
+      "required": "This field is required.",
+      "invalidEmail": "Invalid email address.",
+      "passwordTooShort": "Password must be at least 8 characters."
+    }
+  },
+  "dashboard": {
+    "title": "My Openings",
+    "createNew": "Create an opening",
+    "noOpenings": "You don't have any openings yet. Create your first opening!",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this opening?",
+    "public": "Public",
+    "private": "Private",
+    "toggleVisibility": "Toggle visibility",
+    "form": {
+      "title": "Create an opening",
+      "editTitle": "Edit opening",
+      "name": "Opening name",
+      "namePlaceholder": "E.g. Sicilian Defense",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe this opening...",
+      "ecoCode": "ECO Code",
+      "ecoCodePlaceholder": "E.g. B20",
+      "moves": "Moves (algebraic notation)",
+      "movesPlaceholder": "E.g. 1.e4 c5 2.Nf3 d6",
+      "movesHelp": "Enter moves in standard algebraic notation.",
+      "isPublic": "Make public",
+      "preview": "Board preview",
+      "submit": "Save",
+      "invalidMoves": "The entered moves are not valid."
+    }
+  },
+  "chessboard": {
+    "first": "First move",
+    "previous": "Previous move",
+    "next": "Next move",
+    "last": "Last move",
+    "flipBoard": "Flip board",
+    "moveOf": "Move {{current}} of {{total}}"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "reset": "Reset",
+    "results": "{{count}} result(s)"
+  },
+  "footer": {
+    "copyright": "© 2026 ChessOT — Chess Openings Trainer"
+  }
+}
