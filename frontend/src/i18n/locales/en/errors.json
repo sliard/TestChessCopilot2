@@ -1,0 +1,16 @@
+{
+  "generic": "An error occurred. Please try again.",
+  "network": "Network error. Please check your connection.",
+  "unauthorized": "Please log in to continue.",
+  "forbidden": "You don't have permission to access this resource.",
+  "notFound": "The requested resource was not found.",
+  "validation": "Please check the form for errors.",
+  "server": "Server error. Please try again later.",
+  "pages": {
+    "notFound": {
+      "title": "Page Not Found",
+      "message": "The page you're looking for doesn't exist.",
+      "backHome": "Back to Home"
+    }
+  }
+}

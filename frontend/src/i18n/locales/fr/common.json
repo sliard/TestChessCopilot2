@@ -1,0 +1,75 @@
+{
+  "app": {
+    "name": "Chess Training",
+    "tagline": "Maîtrisez vos ouvertures"
+  },
+  "nav": {
+    "home": "Accueil",
+    "openings": "Ouvertures",
+    "myOpenings": "Mes Ouvertures",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "clear": "Effacer",
+    "submit": "Envoyer",
+    "loading": "Chargement..."
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} sur {{total}}",
+    "showing": "Affichage de {{from}} à {{to}} sur {{total}} résultats"
+  },
+  "language": {
+    "select": "Choisir la langue",
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "landing": {
+    "hero": {
+      "title": "Maîtrisez les ouvertures d'échecs",
+      "subtitle": "Explorez, apprenez et entraînez-vous sur les ouvertures classiques et modernes grâce à notre bibliothèque interactive.",
+      "cta": "Explorer les ouvertures"
+    },
+    "features": {
+      "library": {
+        "title": "Bibliothèque d'ouvertures",
+        "description": "Accédez à une collection complète d'ouvertures classées par code ECO, avec descriptions et variantes."
+      },
+      "chessboard": {
+        "title": "Échiquier interactif",
+        "description": "Visualisez chaque ouverture coup par coup sur un échiquier interactif avec navigation intuitive."
+      },
+      "progress": {
+        "title": "Progression personnelle",
+        "description": "Créez vos propres répertoires, sauvegardez vos ouvertures favorites et suivez votre progression."
+      }
+    },
+    "preview": {
+      "title": "Ouvertures populaires",
+      "subtitle": "Découvrez quelques-unes des ouvertures les plus jouées au monde."
+    },
+    "cta": {
+      "title": "Prêt à progresser ?",
+      "subtitle": "Créez votre compte gratuitement et commencez à construire votre répertoire d'ouvertures.",
+      "button": "S'inscrire gratuitement"
+    },
+    "authenticated": {
+      "welcome": "Bonjour {{firstName}} !",
+      "dashboardLink": "Accéder au tableau de bord"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Chess Training. Tous droits réservés."
+  }
+}
